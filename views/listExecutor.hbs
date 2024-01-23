@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/listEmployee.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <title>Список проектов</title>
+</head>
+<body>
+    <div class="wrapper">
+
+        <header class="header">
+            <div class="container header__container">
+                <a href="/profile" class="logo">
+                    <img class="logo__icon" src="/img/logo.png" alt="Логотип">
+                </a>
+                <ul class="header__menu">
+                    <li class="hader__menu__item"><a class="header__menu__item__link" href="/profile">Профиль</a></li>
+                    <li class="hader__menu__item"><a class="header__menu__item__link" href="/listProjects">Список проектов</a></li>
+                    <li class="hader__menu__item"><a class="header__menu__item__link  header__menu__item__link--active" href="#">Список исполнителей</a></li>
+                    <li class="hader__menu__item"><a class="header__menu__item__link" href="/addingExecutor">Добавить исполнителя</a></li>
+                    <li class="hader__menu__item"><a class="header__menu__item__link" href="/addingProject">Добавить проект</a></li>
+                </ul>
+            </div>
+        </header>
+
+        <main class="main">
+            <div class="container list-eployee">
+               <div class="list-eployee__item">
+
+                <header class="list-eployee__header list-eployee__header--bg-blue">В работе</header>
+
+                <main class="list-eployee__main">
+
+                    <ul class="list-eployee__list">
+                        {{#each work}}
+                            <li class="list-eployee__list__item list-eployee__list__item--double-label">
+                                <form action="/getInfoUser/{{this.idUser}}" class="list-eployee__list__item__info" method="post">
+                                    <button class="list-eployee__list__item__info__btn list-eployee__list__item__info__btn--blue list-eployee__list__item__info__btn--font-16">{{this.firstName}} {{this.lastName}} - {{this.jobTitle}}</button>
+                                </form>
+                                <form action="/getProjet/{{this.idProject}}" class="list-eployee__list__item__info" method="post">
+                                    <button class="list-eployee__list__item__info__btn list-eployee__list__item__info__btn--blue list-eployee__list__item__info__btn--font-16">Работает над: {{this.projectName}}</button>
+                                </form>
+                            </li>
+                        {{/each}}
+                    </ul>
+
+                </main>
+
+               </div>
+
+               <div class="list-eployee__item">
+
+                <header class="list-eployee__header list-eployee__header--bg-green">Свободны</header>
+
+                <main class="list-eployee__main">
+
+                    <ul class="list-eployee__list">
+                        {{#each free}}
+                            <li class="list-eployee__list__item">
+                                <form action="/getInfoUser/{{this.id}}" class="list-eployee__list__item__info" method="post">
+                                    <button class="list-eployee__list__item__info__btn list-eployee__list__item__info__btn--gree">{{this.firstName}} {{this.lastName}} - {{this.jobTitle}}</button>
+                                </form>
+                            </li>
+                        {{/each}}
+                    </ul>
+
+                </main>
+
+               </div>
+
+            </div>
+        </main>
+
+        <footer class="footer">Сайт разработан в образовательных целях</footer>
+    </div>
+
+{{!-- <script src="/js/addEmployee.js"></script> --}}
+</body>
+</html>

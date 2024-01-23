@@ -1,0 +1,134 @@
+.list-projects{
+    display: flex;
+    gap: 30px;
+
+    padding: 20px 0;
+
+    height: 100%;
+}
+
+.list-projects__item{
+    flex: 1 1 33%;
+
+    background-color: #fff;
+
+}
+
+.list-projects__item__header{
+    height: 50px;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #9595FB;
+
+    font-size: 20px;
+
+    user-select: none;
+}
+
+.list-projects__item__header--green{
+    background-color: #95FBAC;
+}
+
+.list-projects__item__header--red{
+    background-color: #FB95AE;
+}
+
+.list-projects__item__list-projects{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    width: 100%;
+    height: 100%;
+
+    padding: 20px;
+}
+
+.list-projects__item__list-projects__item{
+    list-style: none;
+
+    height: 50px;
+    width: 100%;
+
+    border: 1px solid black;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 10px;
+
+    cursor: pointer;
+
+    user-select: none;
+}
+
+.list-projects__item__list-projects__item__title{
+    height: 100%;
+    width: 100%;
+}
+
+.list-projects__item__list-projects__item__title__btn{
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    background-color: transparent;
+
+    font-weight: 500;
+}
+
+.list-projects__item__list-projects__item__btn{
+    width: 25px;
+    height: 25px;
+
+    background: transparent;
+}
+
+.list-projects__item__list-projects__item__btn__icon{
+    width: 100%;
+    height: 100%;
+}
+
+.list-projects__item__list-projects__item--blue{
+    background-color: transparent;
+
+    transition: all .7s ease;
+}
+
+.list-projects__item__list-projects__item--blue:hover{
+    background-color: #c1c1f3;
+
+    transition: all .7s ease;
+}
+
+.list-projects__item__list-projects__item--green{
+    background-color: transparent;
+
+    transition: all .7s ease;
+}
+
+.list-projects__item__list-projects__item--green:hover{
+    background-color: #c3f7cf;
+
+    transition: all .7s ease;
+}
+
+.list-projects__item__list-projects__item--red{
+    background-color: transparent;
+
+    transition: all .7s ease;
+}
+
+.list-projects__item__list-projects__item--red:hover{
+    background-color: #f5b2c3;
+
+    transition: all .7s ease;
+}

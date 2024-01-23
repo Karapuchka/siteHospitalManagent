@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/profile.css">
+    <title>Профиль</title>
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="container header__container">
+                <a href="/profile" class="logo">
+                    <img class="logo__icon" src="/img/logo.png" alt="Логотип">
+                </a>
+                <ul class="header__menu">
+                    <li class="hader__menu__item"><a class="header__menu__item__link" href="/profile">Профиль</a></li>
+                    <li class="hader__menu__item"><a class="header__menu__item__link" href="/listProjects">Список проектов</a></li>
+                    <li class="hader__menu__item"><a class="header__menu__item__link" href="/listExecutor">Список исполнителей</a></li>
+                    <li class="hader__menu__item"><a class="header__menu__item__link" href="/addingExecutor">Добавить исполнителя</a></li>
+                    <li class="hader__menu__item"><a class="header__menu__item__link" href="/addingProject">Добавить проект</a></li>
+                </ul>
+            </div>
+        </header>
+        <main class="main">
+            <div class="container main__container">
+                <div class="main__item main__item--little">
+                    <header class="main__item__header">Сотрудник</header>
+                    <form action="/delEmployee/{{id}}" class="profile__form" name="changeUserInfo" enctype="multipart/form-data" method="post">
+                        <div class="profile__info">
+                            <div class="profile__info__labels">
+                                <label class="profile__form__label" for="first-name">Имя:</label>
+                                <label class="profile__form__label" for="last-name">Фамиля:</label>
+                            </div>
+                            <div class="profile__info__inputs">
+                                <input class="profile__form__input" type="text" id="first-name" name="firstName" value="{{firstName}}">
+                                <input class="profile__form__input" type="text" id="last-name" name="lastName" value="{{lastName}}">
+                            </div>
+                        </div>
+                        <div class="profile___form__bts">
+                            <button class="btn-def profile__form__btn profile__form__btn--yellow" type="submit">Удалить</button>
+                        </div>
+                    </form>
+                </div>
+                <ul class="main__item">
+                    <li class="main__item__header">Проекты в которых учасвтвует сотрудник</li>
+                    {{#each listProjects}}
+                        <li>
+                            <form class="main__item__label" action="/getProjet/{{this.id}}" method="post">
+                                <button type="submit" class="main__item__label__content">
+                                    <p class="main__item__label__title">{{this.title}}</p>
+                                    <p class="main__item__label__btn" >{{this.state}}</p>
+                                </button>
+                            </form>
+                        </li>
+                    {{/each}}
+                </ul>
+            </div>
+        </main>
+        <footer class="footer">Сайт разработан в образовательных целях</footer>
+    </div>
+
+    <script src="/js/profile.js"></script>
+</body>
+</html>

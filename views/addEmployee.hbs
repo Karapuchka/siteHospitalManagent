@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/addEmployee.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <title>Список проектов</title>
+</head>
+<body>
+    <div class="wrapper">
+
+        <header class="header">
+            <div class="container header__container">
+                <a href="/profile" class="logo">
+                    <img class="logo__icon" src="/img/logo.png" alt="Логотип">
+                </a>
+                <ul class="header__menu">
+                    <li class="hader__menu__item"><a class="header__menu__item__link" href="/profile">Профиль</a></li>
+                    <li class="hader__menu__item"><a class="header__menu__item__link" href="/listProjects">Список проектов</a></li>
+                    <li class="hader__menu__item"><a class="header__menu__item__link" href="/listExecutor">Список исполнителей</a></li>
+                    <li class="hader__menu__item"><a class="header__menu__item__link header__menu__item__link--active" href="#">Добавить исполнителя</a></li>
+                    <li class="hader__menu__item"><a class="header__menu__item__link" href="/addingProject">Добавить проект</a></li>
+                </ul>
+            </div>
+        </header>
+
+        <main class="main">
+            <div class="container add-employee__container">
+                <form action="/insertEmployee" class="add-employee__form" name="employee" method="post">
+                    <header class="add-employee__header">Сотрудник</header>
+                    <main class="add-employee__main">
+                        <div class="add-employee__image"><img class="add-employee__image__icon" src="/img/profile/user.png" alt="Иконка пользователя"></div>
+                        <div class="add-employee__info">
+                            <div class="add-employee__info__group-left">
+                                <label for="firstName" class="add-employee__label">Имя:</label>
+                                <label for="lastName" class="add-employee__label">Фамилия:</label>
+                                <label for="jobTitle"  class="add-employee__label">Должность:</label>
+                            </div>
+                            <div class="add-employee__info__group-rigth">
+                                <input type="text" class="add-employee__input" id="firstName" name="firstName">
+                                <input type="text" class="add-employee__input" id="lastName" name="lastName">
+                                <input type="text" class="add-employee__input" id="jobTitle" name="jobTitle">
+                            </div>
+                        </div>
+                        <button type="submit" class="add-employee__btn" name="btn" id="btn-submit">Добавить</button>
+                    </main>
+                </form>
+            </div>
+        </main>
+
+        <footer class="footer">Сайт разработан в образовательных целях</footer>
+    </div>
+
+<script src="/js/addEmployee.js"></script>
+</body>
+</html>

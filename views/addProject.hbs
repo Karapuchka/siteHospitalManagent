@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/addProject.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <title>Список проектов</title>
+</head>
+<body>
+    <div class="wrapper">
+
+        <header class="header">
+            <div class="container header__container">
+                <a href="/profile" class="logo">
+                    <img class="logo__icon" src="/img/logo.png" alt="Логотип">
+                </a>
+                <ul class="header__menu">
+                    <li class="hader__menu__item"><a class="header__menu__item__link" href="/profile">Профиль</a></li>
+                    <li class="hader__menu__item"><a class="header__menu__item__link" href="/listProjects">Список проектов</a></li>
+                    <li class="hader__menu__item"><a class="header__menu__item__link" href="/listExecutor">Список исполнителей</a></li>
+                    <li class="hader__menu__item"><a class="header__menu__item__link" href="/addingExecutor">Добавить исполнителя</a></li>
+                    <li class="hader__menu__item"><a class="header__menu__item__link header__menu__item__link--active" href="#">Добавить проект</a></li>
+                </ul>
+            </div>
+        </header>
+
+        <main class="main">
+          <form action="/insetrProject" method="post" name="project" class="container adding-project__container item-center">
+                <header class="adding-project__header item-center">Новый проект</header>
+                <main class="adding-project__main">
+                    <div class="adding-project__item adding-project__list">
+
+                        <div class="adding-project__item__group">
+                            <label class="adding-project__label" for="project-title">Название проекта:</label><input class="adding-project__input adding-project__item__content" id="project-title" name="title" type="text">
+                        </div>
+
+                        <div class="adding-project__item__group">
+
+                            <label for="inspectors" class="adding-project__label">Проверяющий:</label>
+                            <select name="inspectors" id="inspectors" id="inspectors" class="adding-project__select adding-project__item__content">
+                                <option value="none">Не указан</option>
+                                {{#each manager}}
+                                    <option value="{{this.id}}">{{this.firstName}} {{this.lastName}}</option>
+                                {{/each}}
+                            </select>
+
+                        </div>
+
+                        <div class="adding-project__item__group">
+
+                            <label for="performers" class="adding-project__label">Исполнитель</label>
+                            <select name="performers" id="performers" class="adding-project__select adding-project__item__content">
+                                <option value="none">Не указан</option>
+                                 {{#each employee}}
+                                    <option value="{{this.id}}">{{this.firstName}} {{this.lastName}}</option>
+                                {{/each}}
+                            </select>
+
+                        </div>
+
+                        <div class="adding-project__item__group">
+                            <label class="adding-project__label" for="date">Дедлайн:</label><input class="adding-project__date" id="date" name="date" type="date">
+                        </div>
+
+                    </div>
+                    <div class="adding-project__item adding-project__item--flex-start">
+                        <h2 class="adding-project__tasks-title">Задачи:</h2>
+                        <ul class="adding-project__tasks-list" id="list-tasks"></ul>
+                        <button type="button" id="btn-task" class="adding-project__tasks-btn">Добавить</button>
+                    </div>
+                </main>
+
+                <footer class="adding-project__footer item-center"><button class="adding-project__footer__btn item-center" type="submit" id="btn">Создать</button></footer>
+          </form>
+        </main>
+
+        <footer class="footer">Сайт разработан в образовательных целях</footer>
+    </div>
+
+    <template id="template">
+        <li class="adding-project__tasks-list__item">
+            <input type="text" placeholder="Название задачи" class="adding-project__tasks-list__item__title">
+            <button type="button" class="adding-project__tasks-list__item__del"></button>
+        </li>
+    </template>
+
+<script src="/js/addProject.js"></script>
+
+</body>
+</html>
