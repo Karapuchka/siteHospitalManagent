@@ -1,0 +1,31 @@
+@import 'nullstyles.css';
+@import url(https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,regular,italic,500,500italic,700,700italic,900,900italic);
+
+.wrapper{
+    min-width: 100%;
+    min-height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    font-family: 'Roboto';
+}
+
+.header{
+
+}
+
+.main{
+    flex: 1 1 auto;
+}
+
+.footer{
+
+}
+
+.container{
+    width: 85%;
+
+    padding: 0 15px;
+    margin: 0 auto;
+}

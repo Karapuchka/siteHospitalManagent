@@ -1,25 +1,22 @@
-const formLogin = document.forms.login;
-const errMessange = document.getElementById('error-messange');
+const form = document.forms.login;
 
-formLogin.elements.loginBtnSub.onclick = (e)=>{
+form.onclick = (e)=>{
+    if(e.target.id == 'btn' && (form.elements.login.value == '' || form.elements.password.value == '')){
+        e.preventDefault();
 
-    let errMes = '';
+        alert('Заполните поля!');
 
-    for (let i = 0; i < formLogin.elements.length - 1; i++) {
-        if(formLogin.elements[i].value == ''){
-            e.preventDefault();
+        if(form.elements.login.value == ''){form.elements.login.classList.add('input-error')};   
+        if(form.elements.password.value == ''){form.elements.password.classList.add('input-error')};   
 
-            formLogin.elements[i].style.background = 'rgba(255, 0, 0, 0.3)';
-
-            errMes = 'Заполните все поля!';
-        }      
+        return;
     }
 
-    errMessange.innerText = errMes;
-};
-
-formLogin.onclick = (e)=>{
-    if(e.target.id != 'btnSub'){
-        e.target.style.background = 'none'
+    if(e.target.id == 'login' && e.target.classList.contains('input-error')){
+        form.elements.login.classList.remove('input-error');
     }
-};
+
+    if(e.target.id == 'password' && e.target.classList.contains('input-error')){
+        form.elements.password.classList.remove('input-error');
+    }
+}

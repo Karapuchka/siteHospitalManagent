@@ -1,32 +1,40 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/css/login.css">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/main.css">
     <title>Авторизация</title>
 </head>
 <body>
-    <div class="wrapper login-theme">
+    <div class="wrapper login-container">
+        <form action="/login" method="post" name="login" class="login">
 
-        <main class="login-main">
-            <form action="/login" class="login__form" name="login" method="post">
-                <div class="form__group">
-                    <label class="login__form__label" for="login-user">Логин</label>
-                    <input class="login__form__input" type="text" name="loginUser" id="login-user">
-                </div>
-                <div class="form__group">
-                    <label class="login__form__label" for="password-user">Пароль</label>
-                    <input class="login__form__input" type="text" name="passwordUser" id="password-user">
-                </div>
-                <button type="submit" class="btn-def" id="btnSub" name="loginBtnSub">Вход</button>
-                <a href="/registration" class="login__link">Регистрация</a>
-                <h1 class="login__error" id="error-messange">{{errorMessange}}</h1>
-            </form>
-        </main>
+            <header class="login__title">
 
+                <div class="login__title__image">
+                    <img src="/img/logo.png" alt="Логотип" class="login__title__image__icon">
+                </div>
+
+                <h2 class="logo__title__text">Hospital</h2>
+
+            </header>
+
+            <main class="login__main">
+
+                <h3 class="logo__main__title">{{messanger}}</h3>
+
+                <input type="text" class="logo__main__input" name="login" id="login" placeholder="Введите логин">
+
+                <input type="password" class="logo__main__input" name="password" id="password" placeholder="Введите пароль">
+
+            </main>
+
+            <button type="submit" name="btn" id="btn" class="login__btn">Вход</button>
+
+        </form>
     </div>
 
     <script src="/js/login.js"></script>
