@@ -9,6 +9,8 @@
     flex-direction: column;
 
     font-family: 'Roboto';
+
+    position: relative;
 }
 
 .header{
@@ -28,4 +30,259 @@
 
     padding: 0 15px;
     margin: 0 auto;
+}
+
+.burger{
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 300px;
+    height: 100%;
+
+    background: #B5D7FF;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    padding-top: 40px;
+
+    transition: all 2s ease;
+}
+
+.burger__btn-exit{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    position: absolute;
+    top: 30px;
+    right: 20px;
+
+    width: 30px;
+    height: 30px;
+
+    cursor: pointer;
+
+    transform: scale(1);
+
+    transition: transform .7s ease;
+}
+
+.burger__btn-exit:hover{
+    transform: scale(1.1);
+
+    transition: transform .7s ease;
+}
+
+.burger__btn-exit__line{
+    width: 100%;
+    height: 1px;
+
+    background-color: black;
+}
+
+.burger__btn-exit__line--left{
+    transform: rotate(45deg);
+}
+
+.burger__btn-exit__line--right{
+    transform: rotate(-45deg) translate(25%, -700%);
+}
+
+.burger__logo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.burger__logo__images{
+    width: 65px;
+    height: 65px;
+}
+
+.burger__logo__images__icon{
+    width: 100%;
+    height: 100%;
+}
+
+.burger__logo__text{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.burger__logo__text__label{
+    text-align: center;
+    
+    font-size: 14px;
+
+    user-select: none;
+}
+
+.burger__logo__text__label--size-20{
+    font-size: 20px;
+}
+
+.burger__menu{
+    user-select: none;
+
+    margin-bottom: 80%;
+}
+
+.burger__menu__list{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+}
+
+.burger__menu__list__item{
+    list-style: none;
+
+    text-align: center;
+
+    position: relative;
+
+    width: 100%;
+}
+
+.burger__menu__list__item::after{
+    content: '';
+
+    position: absolute;
+    bottom: -100%;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 116px;
+    height: 2px;
+
+    background-color: #fff;
+}
+
+.burger__menu__list__item:last-child:after{
+    display: none;
+}
+
+.burger__menu__list__item__link{
+    color: #000;
+
+    font-size: 24px;
+
+    transition: all .7s ease;
+}
+
+.burger__menu__list__item__link:hover{
+   transition: all .7s ease;
+   
+   color: #958e59;
+}
+
+.burger__btns, .burger__btns__form{
+    width: 100%;
+}
+
+.burger__btns__form__btn{
+    width: 100%;
+    height: 60px;
+
+    background-color: transparent;
+
+    transition: all .7s ease;
+
+    font-size: 24px;
+    
+    background: transparent;
+}
+
+.burger__btns__form__btn:hover{
+
+   background: #3d87dc;
+
+   transition: all .7s ease;
+}
+
+.burger__btns__btn{
+    width: 100%;
+    height: 45px;
+
+    background-color: #fff;
+
+    border: 1px solid gray;
+}
+
+.burger__btns__btn__link{
+    font-size: 20px;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: transparent;
+
+    transition: all .7s ease;
+
+    color: #000;
+}
+
+.burger__btns__btn__link:hover{
+    font-size: 20px;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #3d87dc;
+
+    transition: all .7s ease;
+}
+
+.burger-btn{
+    position: absolute;
+    top: 2%;
+    left: 1%;
+
+    width: 50px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    transition: transform .5s ease;
+
+    cursor: pointer;
+}
+
+.burger-btn__line{
+    flex-shrink: 100%;
+
+    height: 3px;
+
+    background-color: #000;
+
+    transition: transform .4s ease;
+}
+
+.burger-btn:hover .burger-btn__line:first-child{
+    transform: translateX(10%);
+
+    transition: transform .4s ease;
+}
+
+.burger-btn:hover .burger-btn__line:last-child{
+    transform: translateX(-10%);
+
+    transition: transform .4s ease;
 }
