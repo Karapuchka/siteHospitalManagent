@@ -6,7 +6,7 @@
     <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/main.css">
-    <title>Document</title>
+    <title>Главная</title>
 </head>
 <body>
 
@@ -56,12 +56,139 @@
 
         <header class="header">
             <div class="container">
-
+                <nav class="menu">
+                    <ul class="menu__list" id="js-menu-list">
+                        <li class="menu__list__item" data-show="0" id="js-menu-item-1">Терапевтический корпус</li>
+                        <li class="menu__list__item" data-show="2" id="js-menu-item-2">Педиатрическое отделение</li>
+                        <li class="menu__list__item" data-show="3" id="js-menu-item-3">Офтальмология</li>
+                        <li class="menu__list__item" data-show="4" id="js-menu-item-4">Отделение неврологии</li>
+                        <li class="menu__list__item" data-show="5" id="js-menu-item-5">Стоматологическое отделение</li>
+                        <li class="menu__list__item" data-show="6" id="js-menu-item-6">Травмпункт</li>
+                    </ul>
+                </nav>
             </div>
         </header>
 
-        <main class="main"></main>
-        
+        <main class="main">
+            <div class="slider container" id="js-slider">
+                <ul class="slider__line" id="js-slider-line">
+                    <li class="slider__line__item" id="js-slider-line__item-1">
+                        <ul class="list-employee">    
+                            {{#each emoloyeeTerapevt}}
+                                <li class="list-employee__item">
+                                    <form action="/getEmployee/{{this.id}}" class="list-employee__item__form" method="post">
+                                       <button class="list-employee__item__form__btn">
+                                            <div class="list-employee__item__image">
+                                                <img src="{{this.pathImg}}" alt="" class="list-employee__item__image__icon">
+                                            </div>
+                                            <div class="list-employee__item__text">
+                                                <p class="list-employee__item__text__name">{{this.firstName}} {{this.lastName}} {{this.surName}}</p>
+                                                <p class="list-employee__item__text__label">{{this.jobTitle}}</p>
+                                            </div>
+                                       </button>
+                                    </form>
+                                </li>
+                            {{/each}}
+                        </ul>
+                    </li>
+                    <li class="slider__line__item" id="js-slider-line__item-2">
+                        <ul class="list-employee">
+                             {{#each emoloyeePediatr}}
+                                <li class="list-employee__item">
+                                    <form action="/getEmployee/{{this.id}}" class="list-employee__item__form" method="post">
+                                       <button class="list-employee__item__form__btn">
+                                            <div class="list-employee__item__image">
+                                                <img src="{{this.pathImg}}" alt="" class="list-employee__item__image__icon">
+                                            </div>
+                                            <div class="list-employee__item__text">
+                                                <p class="list-employee__item__text__name">{{this.firstName}} {{this.lastName}} {{this.surName}}</p>
+                                                <p class="list-employee__item__text__label">{{this.jobTitle}}</p>
+                                            </div>
+                                       </button>
+                                    </form>
+                                </li>
+                            {{/each}}
+                        </ul>
+                    </li>
+                    <li class="slider__line__item" id="js-slider-line__item-3">
+                        <ul class="list-employee">
+                            {{#each emoloyeeOftolmolog}}
+                                <li class="list-employee__item">
+                                    <form action="/getEmployee/{{this.id}}" class="list-employee__item__form" method="post">
+                                       <button class="list-employee__item__form__btn">
+                                            <div class="list-employee__item__image">
+                                                <img src="{{this.pathImg}}" alt="" class="list-employee__item__image__icon">
+                                            </div>
+                                            <div class="list-employee__item__text">
+                                                <p class="list-employee__item__text__name">{{this.firstName}} {{this.lastName}} {{this.surName}}</p>
+                                                <p class="list-employee__item__text__label">{{this.jobTitle}}</p>
+                                            </div>
+                                       </button>
+                                    </form>
+                                </li>
+                            {{/each}}
+                        </ul>
+                    </li>
+                    <li class="slider__line__item" id="js-slider-line__item-4">
+                        <ul class="list-employee">
+                            {{#each emoloyeeNevrolog}}
+                                <li class="list-employee__item">
+                                    <form action="/getEmployee/{{this.id}}" class="list-employee__item__form" method="post">
+                                       <button class="list-employee__item__form__btn">
+                                            <div class="list-employee__item__image">
+                                                <img src="{{this.pathImg}}" alt="" class="list-employee__item__image__icon">
+                                            </div>
+                                            <div class="list-employee__item__text">
+                                                <p class="list-employee__item__text__name">{{this.firstName}} {{this.lastName}} {{this.surName}}</p>
+                                                <p class="list-employee__item__text__label">{{this.jobTitle}}</p>
+                                            </div>
+                                       </button>
+                                    </form>
+                                </li>
+                            {{/each}}
+                        </ul>
+                    </li>
+                    <li class="slider__line__item" id="js-slider-line__item-5">
+                        <ul class="list-employee">
+                            {{#each emoloyeeStomotolog}}
+                                <li class="list-employee__item">
+                                    <form action="/getEmployee/{{this.id}}" class="list-employee__item__form" method="post">
+                                       <button class="list-employee__item__form__btn">
+                                            <div class="list-employee__item__image">
+                                                <img src="{{this.pathImg}}" alt="" class="list-employee__item__image__icon">
+                                            </div>
+                                            <div class="list-employee__item__text">
+                                                <p class="list-employee__item__text__name">{{this.firstName}} {{this.lastName}} {{this.surName}}</p>
+                                                <p class="list-employee__item__text__label">{{this.jobTitle}}</p>
+                                            </div>
+                                       </button>
+                                    </form>
+                                </li>
+                            {{/each}}
+                        </ul>
+                    </li>
+                    <li class="slider__line__item" id="js-slider-line__item-6">
+                        <ul class="list-employee">
+                            {{#each emoloyeeTravma}}
+                                <li class="list-employee__item">
+                                    <form action="/getEmployee/{{this.id}}" class="list-employee__item__form" method="post">
+                                       <button class="list-employee__item__form__btn">
+                                            <div class="list-employee__item__image">
+                                                <img src="{{this.pathImg}}" alt="" class="list-employee__item__image__icon">
+                                            </div>
+                                            <div class="list-employee__item__text">
+                                                <p class="list-employee__item__text__name">{{this.firstName}} {{this.lastName}} {{this.surName}}</p>
+                                                <p class="list-employee__item__text__label">{{this.jobTitle}}</p>
+                                            </div>
+                                       </button>
+                                    </form>
+                                </li>
+                            {{/each}}
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </main> 
     </div>
 
     <script src="/js/main.js"></script>
