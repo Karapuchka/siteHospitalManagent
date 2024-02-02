@@ -13,7 +13,7 @@ const pool = mysql.createPool({
     connectionLimit: 10,
     host: 3000,
     user: 'root',
-    database: 'project',
+    database: 'hospitalmanager',
 });
 
 //Создание парсера
@@ -70,7 +70,59 @@ app.post('/login', urlcodedParsers, (req, res)=>{
 });
 
 app.get('/home', (_, res)=>{
-    res.render('home.hbs');
+
+    let listTerapevt = [], 
+        listPediatr = [], 
+        listOftolmolog = [], 
+        listNevrolog = [], 
+        listStomotolog = [], 
+        listTravmpunkt = [];
+
+    pool.query('SELECT * FROM users', (err, data)=>{
+        if(err) return console.log(err);
+
+        for (let i = 0; i < data.length; i++) {
+            switch (data[i].department) {
+                case 'Терапевтический корпус':
+                    listTerapevt.push(data[i]);
+                    break;
+
+                case 'Педиатрическое отделение':
+                    listPediatr.push(data[i]);
+                    break;
+
+                case 'Офтальмология':
+                    listOftolmolog.push(data[i]);
+                    break;
+
+                case 'Отделение неврологии':
+                    listNevrolog.push(data[i]);
+                    break;
+
+                case 'Стоматологическое отделение':
+                    listStomotolog.push(data[i]);
+                    break;
+
+                case 'Травмпункт':
+                    listTravmpunkt.push(data[i]);
+                    break;
+            
+                default:
+                    console.log(`Указаное некорректное значение свойства deportamnet ${data[i].department}`);
+                    console.log(data[i]);
+                    break;
+            }           
+        }
+
+        return res.render('home.hbs', {
+            emoloyeeTerapevt: listTerapevt,
+            emoloyeePediatr: listPediatr,
+            emoloyeeOftolmolog: listOftolmolog,
+            emoloyeeNevrolog: listNevrolog,
+            emoloyeeStomotolog: listStomotolog,
+            emoloyeeTravma: listTravmpunkt,
+        });
+    });
 });
 
 app.listen(3000, ()=>{

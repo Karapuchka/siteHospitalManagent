@@ -16,8 +16,6 @@
 .header{
     position: relative;
     z-index: 1;
-
-    margin-bottom: 50px;
 }
 
 .main{
@@ -25,6 +23,8 @@
 
     position: relative;
     z-index: 1;
+
+    padding: 40px 0;
 }
 
 .footer{
@@ -271,6 +271,8 @@
     transition: transform .5s ease;
 
     cursor: pointer;
+    
+    z-index: 5;
 }
 
 .burger-btn__line{
