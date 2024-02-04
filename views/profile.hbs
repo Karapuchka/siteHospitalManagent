@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/profile.css">
+    <title>Профиль</title>
+</head>
+<body>
+
+    <div class="wrapper">
+        
+        <aside class="burger" data-hidden="" id="burder">
+
+            <div class="burger__btn-exit" id="js-burger-btn-exit">
+                <span class="burger__btn-exit__line burger__btn-exit__line--left"></span>
+                <span class="burger__btn-exit__line burger__btn-exit__line--right"></span>
+            </div>
+
+            <div class="burger__logo">
+
+                <div class="burger__logo__images">
+                    <img src="/img/logo.png" alt="" class="burger__logo__images__icon">
+                </div>
+
+                <div class="burger__logo__text">
+                    <p class="burger__logo__text__label burger__logo__text__label--size-20">Hospital</p>
+                    <p class="burger__logo__text__label">Taking care of you</p>
+                </div>
+
+            </div>
+
+            <nav class="burger__menu">
+                <ul class="burger__menu__list">
+                    <li class="burger__menu__list__item"><a class="burger__menu__list__item__link" href="#">Список врачей</a></li>
+                    <li class="burger__menu__list__item"><a class="burger__menu__list__item__link" href="/reports">Отчеты</a></li>
+                    <li class="burger__menu__list__item"><a class="burger__menu__list__item__link" href="/patients">Пациенты</a></li>
+                    <li class="burger__menu__list__item"><a class="burger__menu__list__item__link" href="/reception">Записать на приём</a></li>
+                </ul>
+            </nav>
+
+            <div class="burger__btns">
+                <form action="/profile" class="burger__btns__form" method="post"><button class="burger__btns__form__btn" type="submit">Профиль</button></form>
+                <div class="burger__btns__btn"><a href="/" class="burger__btns__btn__link">Выход</a></div>
+            </div>
+
+        </aside>
+
+        <div class="burger-btn" id="jd-burger-btn">
+            <span class="burger-btn__line"></span>
+            <span class="burger-btn__line"></span>
+            <span class="burger-btn__line"></span>
+        </div>
+
+        <header class="header">
+            <div class="container profile-header">
+               <a href="/home" class="profile-back-home">Вернуться к списку врачей</a>
+            </div>
+        </header>
+
+        <main class="main">
+            <div class="container profile-main">
+                <div class="profile-info">
+                    <div class="profile-info__img"><img src="{{pathImg}}" alt="" class="profile-info__img__icon"></div>
+                    <ul class="profile-info__content">
+                        <li class="profile-info__content__item"><span class="profile-info__content__item__title">ФИО:</span><span>{{firstName}} {{lastName}} {{surName}}</span></li>
+                        <li class="profile-info__content__item"><span class="profile-info__content__item__title">Должность:</span><span>{{jobTitle}}</span></li>
+                        <li class="profile-info__content__item"><span class="profile-info__content__item__title">Отделение:</span><span>{{department}}</span></li>
+                    </ul>
+                </div>
+
+                <div class="profile-list">
+                    <h3 class="profile-list__title">Список записей</h3>
+                    <ul class="profile-list__patients">
+                        {{#each listPatients}}
+                            <li class="profile-list__patients__item">
+                                <span>ФИО: {{this.firstName}} {{this.lastName}} {{this.surName}}</span>
+                                <span class="profile-list__patients__item--big">Диагноз: {{this.diagnosis}}</span>
+                                <span>Дата приёма: {{this.date}}</span>
+                                <form action="/getCards/{{this.id}}" class="profile-list__patients__item__form" method="post">
+                                    <button class="profile-list__patients__item__form__btn" type="submit">Открыть карту</button>
+                                </form>
+                            </li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+        </main> 
+    </div>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>

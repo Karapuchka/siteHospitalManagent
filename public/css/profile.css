@@ -1,0 +1,133 @@
+.profile-header{
+    padding: 10px 0;
+}
+
+.profile-main{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.profile-info{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 50px;
+}
+
+.profile-back-home{
+    font-size: 32px;
+    text-decoration: underline;
+
+    color: #000;
+
+    transition: all .7s ease;
+}
+
+.profile-back-home:hover{
+    color: #4a4a4a;
+
+    transition: all .7s ease;
+}
+
+.profile-info__img{
+    width: 250px;
+    height: 220px;
+}
+
+.profile-info__img__icon{
+    width: 100%;
+    height: 100%;
+}
+
+.profile-info__content{
+    background-color: #E1EDFF;
+
+    width: 250px;
+    height: 220px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+
+    padding: 0 20px;
+}
+
+.profile-info__content__item{
+    list-style: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.profile-info__content__item__title{
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.profile-list{
+    flex: 1 1 auto;
+
+    width: 100%;
+    height: 100%;
+}
+
+.profile-list__title{
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.profile-list__patients{
+    width: 100%;
+    height: 100%;
+
+    border-top: 1px solid black;
+}
+
+.profile-list__patients__item{
+    width: 100%;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 10px;
+
+    border-bottom: 1px solid black;
+}
+
+.profile-list__patients__item:nth-child(2n){
+    background-color: #EDF4FF;
+}
+
+.profile-list__patients__item--big{
+    width: 50%;
+}
+
+.profile-list__patients__item__form{
+    width: 134px;
+    height: 30px;
+}
+
+.profile-list__patients__item__form__btn{
+    width: 100%;
+    height: 100%;
+
+    background-color: #A1ABFF;
+    
+    transition: all .7s ease;
+}
+
+.profile-list__patients__item__form__btn:hover{
+    background-color: #d5d8f7;
+
+    transition: all .7s ease;
+}

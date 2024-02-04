@@ -55,6 +55,8 @@ app.post('/login', urlcodedParsers, (req, res)=>{
         for (let i = 0; i < data.length; i++) {
             if(data[i].login == req.body.login){
                 if(data[i].password == req.body.password){
+
+                    user = data[i];
                     return res.redirect('/home');
                 }
                 else {
@@ -122,6 +124,29 @@ app.get('/home', (_, res)=>{
             emoloyeeStomotolog: listStomotolog,
             emoloyeeTravma: listTravmpunkt,
         });
+    });
+});
+
+app.post('/getEmployee/:id', urlcodedParsers, (_, res)=>{
+
+    pool.query('SELECT * FROM users', (err, data)=>{
+        if(err) return console.log(err);
+    });
+
+    res.render('profile.hbs', {
+
+    });
+});
+
+app.post('/profile', (req, res)=>{
+
+    res.render('profile.hbs', {
+        pathImg: user.pathImg,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        surName: user.surName,
+        jobTitle: user.jobTitle,
+        department: user.department,
     });
 });
 
