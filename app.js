@@ -129,27 +129,136 @@ app.get('/home', (_, res)=>{
 
 app.post('/getEmployee/:id', urlcodedParsers, (_, res)=>{
 
+    pool.query()
+    /* Сделать вывод списка приёмов → сделать таблицу с пациентами, отчётами, записями */
+
     pool.query('SELECT * FROM users', (err, data)=>{
         if(err) return console.log(err);
+
+        for (let i = 0; i < data.length; i++) {
+            if(data[i].id == req.params.id){
+                res.render('profile.hbs', {
+                    pathImg: user.pathImg,
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    surName: user.surName,
+                    jobTitle: user.jobTitle,
+                    department: user.department,
+                });
+            }            
+        }
     });
 
-    res.render('profile.hbs', {
-
-    });
 });
 
 app.post('/profile', (req, res)=>{
 
-    res.render('profile.hbs', {
-        pathImg: user.pathImg,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        surName: user.surName,
-        jobTitle: user.jobTitle,
-        department: user.department,
+    let listConclusion = [];
+    
+    
+    pool.query('SELECT * FROM conclusion', (err, data)=>{
+        if(err) return console.log(err);
+
+        for (let i = 0; i < data.length; i++) {
+            if(data[i].id == user.id){
+                listConclusion.push(data[i]);               
+            }            
+        }
+
+        pool.query('SELECT * FROM patient', (errPatient, dataPatient)=>{
+            if(errPatient) return console.log(errPatient);
+
+            let listPatents = [];
+
+            for (let i = 0; i < dataPatient.length; i++) {
+
+                for (let j = 0; j < listConclusion.length; j++) {
+                    if(dataPatient[i].id == listConclusion[j].id){
+                     
+                        listPatents.push({
+                            "id": dataPatient[i].id,
+                            "firstName": dataPatient[i].firstName,
+                            "lastName": dataPatient[i].lastName,
+                            "surName": dataPatient[i].surName,
+                            "date": validDate(listConclusion[j].date),
+                            "diagnosis": listConclusion[j].diagnosis,
+                        });
+                    };
+                };
+            };
+
+            return res.render('profile.hbs', {
+                pathImg: user.pathImg,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                surName: user.surName,
+                jobTitle: user.jobTitle,
+                department: user.department,
+                listPatients: listPatents,
+            });
+        });
+
     });
+});
+
+app.get('/patients', (_, res)=>{
+    pool.query('SELECT * FROM patient', (err, data)=>{
+        if(err) return console.log(err);
+        
+        let listPatients = [];
+       
+        pool.query('SELECT * FROM patientcard', (errCards, dataCards)=>{
+            if(errCards) return console.log(errCards);
+
+            for (let i = 0; i < data.length; i++) {
+                
+                for (let j = 0; j < dataCards.length; j++) {
+
+                    if(dataCards[j].idPatient == data[i].id){
+                        listPatients.push({
+                            'firstName': data.firstName,
+                            'lastName': data.lastName,
+                            'surName': data.surName,
+                            'status': dataCards[j].status ? 'Активная заявка' : 'Не активная заявка',
+                        });
+                        break;
+                    };                 
+                };
+            };
+
+            return res.render('patient.hbs', {
+                listPatients: listPatients,
+            });
+        });
+    });
+});
+
+app.post('/getCards/:id', urlcodedParsers, (req, res)=>{
+    if(!req.body) return res.send(400);
 });
 
 app.listen(3000, ()=>{
     console.log('Server ative. URL: http://localhost:3000/');
 });
+
+//Преобразование даты из бд в нормальный вид
+function validDate(date){
+    let arr = String(date).split(' ');
+
+    let listMonth = {
+        "Jan": "Января",
+        "Feb": "Февраля",
+        "Mar": "Марта",
+        "Apr": "Апреля",
+        "May": "Мая",
+        "June": "Июня",
+        "July": "Июля",
+        "Aug": "Августа",
+        "Sept": "Сентября",
+        "Oct": "Октября",
+        "Nov": "Ноября",
+        "Dec": "Декабря",
+    }
+
+    return `${arr[2]} ${listMonth[arr[1]]} ${arr[3]}`;
+}
