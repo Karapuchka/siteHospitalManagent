@@ -127,28 +127,68 @@ app.get('/home', (_, res)=>{
     });
 });
 
-app.post('/getEmployee/:id', urlcodedParsers, (_, res)=>{
-
-    pool.query()
-    /* Сделать вывод списка приёмов → сделать таблицу с пациентами, отчётами, записями */
+app.post('/getEmployee/:id', urlcodedParsers, (req, res)=>{
 
     pool.query('SELECT * FROM users', (err, data)=>{
         if(err) return console.log(err);
 
+        let doctor;
+
         for (let i = 0; i < data.length; i++) {
             if(data[i].id == req.params.id){
-                res.render('profile.hbs', {
-                    pathImg: user.pathImg,
-                    firstName: user.firstName,
-                    lastName: user.lastName,
-                    surName: user.surName,
-                    jobTitle: user.jobTitle,
-                    department: user.department,
-                });
-            }            
+                doctor = data[i];
+                break;
+            }
         }
-    });
 
+        let listConclusion = [];
+    
+        pool.query('SELECT * FROM conclusion', (err, dataConclusion)=>{
+            if(err) return console.log(err);
+
+    
+            for (let i = 0; i < dataConclusion.length; i++) {
+                if(dataConclusion[i].idDoctor == req.params.id){
+                    listConclusion.push(dataConclusion[i]);               
+                }            
+            }
+
+
+            pool.query('SELECT * FROM patient', (errPatient, dataPatient)=>{
+                if(errPatient) return console.log(errPatient);
+    
+                let listPatents = [];
+    
+                for (let i = 0; i < dataPatient.length; i++) {
+    
+                    for (let j = 0; j < listConclusion.length; j++) {
+
+                        if(dataPatient[i].id == listConclusion[j].idPationt){
+                         
+                            listPatents.push({
+                                "id": dataPatient[i].id,
+                                "firstName": dataPatient[i].firstName,
+                                "lastName": dataPatient[i].lastName,
+                                "surName": dataPatient[i].surName,
+                                "date": validDate(listConclusion[j].date),
+                                "diagnosis": listConclusion[j].diagnosis,
+                            });
+                        };
+                    };
+                };
+    
+                return res.render('profile.hbs', {
+                    pathImg: doctor.pathImg,
+                    firstName: doctor.firstName,
+                    lastName: doctor.lastName,
+                    surName: doctor.surName,
+                    jobTitle: doctor.jobTitle,
+                    department: doctor.department,
+                    listPatients: listPatents,
+                });
+            });   
+        });
+    });
 });
 
 app.post('/profile', (req, res)=>{
@@ -160,7 +200,7 @@ app.post('/profile', (req, res)=>{
         if(err) return console.log(err);
 
         for (let i = 0; i < data.length; i++) {
-            if(data[i].id == user.id){
+            if(data[i].idDoctor == user.id){
                 listConclusion.push(data[i]);               
             }            
         }
@@ -173,7 +213,7 @@ app.post('/profile', (req, res)=>{
             for (let i = 0; i < dataPatient.length; i++) {
 
                 for (let j = 0; j < listConclusion.length; j++) {
-                    if(dataPatient[i].id == listConclusion[j].id){
+                    if(dataPatient[i].id == listConclusion[j].idPationt){
                      
                         listPatents.push({
                             "id": dataPatient[i].id,
@@ -206,7 +246,7 @@ app.get('/patients', (_, res)=>{
         if(err) return console.log(err);
         
         let listPatients = [];
-       
+
         pool.query('SELECT * FROM patientcard', (errCards, dataCards)=>{
             if(errCards) return console.log(errCards);
 
@@ -216,10 +256,11 @@ app.get('/patients', (_, res)=>{
 
                     if(dataCards[j].idPatient == data[i].id){
                         listPatients.push({
-                            'firstName': data.firstName,
-                            'lastName': data.lastName,
-                            'surName': data.surName,
-                            'status': dataCards[j].status ? 'Активная заявка' : 'Не активная заявка',
+                            'id': data[i].id,
+                            'firstName': data[i].firstName,
+                            'lastName': data[i].lastName,
+                            'surName': data[i].surName,
+                            'status': dataCards[j].status,
                         });
                         break;
                     };                 

@@ -34,9 +34,9 @@
 
             <nav class="burger__menu">
                 <ul class="burger__menu__list">
-                    <li class="burger__menu__list__item"><a class="burger__menu__list__item__link" href="#">Список врачей</a></li>
+                    <li class="burger__menu__list__item"><a class="burger__menu__list__item__link" href="/home">Список врачей</a></li>
                     <li class="burger__menu__list__item"><a class="burger__menu__list__item__link" href="/reports">Отчеты</a></li>
-                    <li class="burger__menu__list__item"><a class="burger__menu__list__item__link" href="/patients">Пациенты</a></li>
+                    <li class="burger__menu__list__item"><a class="burger__menu__list__item__link" href="#">Пациенты</a></li>
                     <li class="burger__menu__list__item"><a class="burger__menu__list__item__link" href="/reception">Записать на приём</a></li>
                 </ul>
             </nav>
@@ -55,10 +55,23 @@
         </div>
 
         <main class="main">
-            <div class="container">
-                {{!-- 
-                    1. Сверстал страницу со списком пациентов.
-                 --}}
+            <div class="container patient">
+                <div class="patient-filter" id="js-filter">
+                    <p class="patient-filter__label">Оставить только активные заявки:</p>
+                    <div class="patient-filter__checked"></div>
+                </div>
+
+                <ul class="patient-list">
+                    {{#each listPatients}}
+                        <li class="patient-list__item" data-status="{{this.status}}">
+                            <form action="/getPatient/{{this.id}}" class="patient-list__item__form" method="post">
+                                <p class="patient-list__item__text">Пациент: {{this.lastName}} {{this.firstName}} {{this.surName}}</p>
+                                <p class="patient-list__item__status patient-list__item__status--{{this.status}}">{{#if this.status}}Активная заявка{{else}}Не активная заявка{{/if}}</p>
+                                <button class="patient-list__item__btn" type="submit">Открыть карту</button>
+                            </form>
+                        </li>
+                    {{/each}}
+                </ul>
             </div>
         </main> 
     </div>
