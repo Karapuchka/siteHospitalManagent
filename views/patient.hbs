@@ -64,7 +64,7 @@
                 <ul class="patient-list">
                     {{#each listPatients}}
                         <li class="patient-list__item" data-status="{{this.status}}">
-                            <form action="/getPatient/{{this.id}}" class="patient-list__item__form" method="post">
+                            <form action="/getCards/{{this.id}}" class="patient-list__item__form" method="post">
                                 <p class="patient-list__item__text">Пациент: {{this.lastName}} {{this.firstName}} {{this.surName}}</p>
                                 <p class="patient-list__item__status patient-list__item__status--{{this.status}}">{{#if this.status}}Активная заявка{{else}}Не активная заявка{{/if}}</p>
                                 <button class="patient-list__item__btn" type="submit">Открыть карту</button>

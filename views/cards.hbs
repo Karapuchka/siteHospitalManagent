@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/cards.css">
+    <title>Главная</title>
+</head>
+<body>
+
+    <div class="wrapper">
+        
+        <aside class="burger" data-hidden="" id="burder">
+
+            <div class="burger__btn-exit" id="js-burger-btn-exit">
+                <span class="burger__btn-exit__line burger__btn-exit__line--left"></span>
+                <span class="burger__btn-exit__line burger__btn-exit__line--right"></span>
+            </div>
+
+            <div class="burger__logo">
+
+                <div class="burger__logo__images">
+                    <img src="/img/logo.png" alt="" class="burger__logo__images__icon">
+                </div>
+
+                <div class="burger__logo__text">
+                    <p class="burger__logo__text__label burger__logo__text__label--size-20">Hospital</p>
+                    <p class="burger__logo__text__label">Taking care of you</p>
+                </div>
+
+            </div>
+
+            <nav class="burger__menu">
+                <ul class="burger__menu__list">
+                    <li class="burger__menu__list__item"><a class="burger__menu__list__item__link" href="/home">Список врачей</a></li>
+                    <li class="burger__menu__list__item"><a class="burger__menu__list__item__link" href="/reports">Отчеты</a></li>
+                    <li class="burger__menu__list__item"><a class="burger__menu__list__item__link" href="#">Пациенты</a></li>
+                    <li class="burger__menu__list__item"><a class="burger__menu__list__item__link" href="/reception">Записать на приём</a></li>
+                </ul>
+            </nav>
+
+            <div class="burger__btns">
+                <form action="/profile" class="burger__btns__form" method="post"><button class="burger__btns__form__btn" type="submit">Профиль</button></form>
+                <div class="burger__btns__btn"><a href="/" class="burger__btns__btn__link">Выход</a></div>
+            </div>
+
+        </aside>
+
+        <div class="burger-btn" id="jd-burger-btn">
+            <span class="burger-btn__line"></span>
+            <span class="burger-btn__line"></span>
+            <span class="burger-btn__line"></span>
+        </div>
+
+        <header class="header">
+             <div class="container cards-header-container">
+                <ul class="cards-info__list">
+                    <li class="cards-info__list__item">ФИО: {{firstName}} {{lastName}} {{surName}}</li>
+                    <li class="cards-info__list__item">Пол: {{gender}}</li>
+                    <li class="cards-info__list__item">Полис ОМС: {{polis}}</li>
+                    <li class="cards-info__list__item">СНИЛС: {{snils}}</li>
+                </ul>
+                <ul class="cards-info__list">
+                    <li class="cards-info__list__item">Статус заявки: <span {{#if statusCards}}class="cards-info__list__item--green"{{else}}class="cards-info__list__item--red"{{/if}}>{{status}}</span></li>
+                    <li class="cards-info__list__item">Номер телефона: <a href="tel:{{phone}}">{{phone}}</a></li>
+                    <li class="cards-info__list__item">Email: {{email}}</li>
+                    <li class="cards-info__list__item">ID пациента: {{id}}</li>
+                </ul>
+                <ul class="cards-info__list">
+                    <li class="cards-info__list__item"><div class="cards-btns-label cards-btns-label--green js-active-modal" data-modal="record">Добавить запись</div></li>
+                    <li class="cards-info__list__item"><form class="cards-btns" action="/printCards"><button class="cards-btns-label cards-btns-label--gray" type="submit">Распечатать карточку</button></form></li>
+                    <li class="cards-info__list__item"><form class="cards-btns" action="/showCards"><button class="cards-btns-label cards-btns-label--red" type="submit">Перевести в статус {{#if status}}«Закрыт»{{else}}«Активный»{{/if}}</button></form></li>
+                </ul>
+            </div>
+        </header>
+
+        <main class="main">
+            <div class="container">
+                <h3 class="cards-title">История лечения:</h3>
+                <ul class="cards-list">
+                    <li class="cards-list__item">
+                            <p class="cards-list__item__label">ФИО врача: {{this.firstName}} {{this.lastName}} {{this.surName}}</p>
+                            <p class="cards-list__item__label">Диагноз: {{this.diagnosis}}</p>
+                            <p class="cards-list__item__label cards-list__item__label--little">Дата приёма: {{this.date}}</p>
+                            <div class="cards-list__item__btn js-active-modal" data-modal="conclusion">Открыть заключение</div>
+                        </li>
+                        <li class="cards-list__item">
+                            <p class="cards-list__item__label">ФИО врача: {{this.firstName}} {{this.lastName}} {{this.surName}}</p>
+                            <p class="cards-list__item__label">Диагноз: {{this.diagnosis}}</p>
+                            <p class="cards-list__item__label cards-list__item__label--little">Дата приёма: {{this.date}}</p>
+                            <div class="cards-list__item__btn js-active-modal" data-modal="conclusion">Открыть заключение</div>
+                        </li>
+                        <li class="cards-list__item">
+                            <p class="cards-list__item__label">ФИО врача: {{this.firstName}} {{this.lastName}} {{this.surName}}</p>
+                            <p class="cards-list__item__label">Диагноз: {{this.diagnosis}}</p>
+                            <p class="cards-list__item__label cards-list__item__label--little">Дата приёма: {{this.date}}</p>
+                            <div class="cards-list__item__btn js-active-modal" data-modal="conclusion">Открыть заключение</div>
+                        </li>
+                    {{#each cardsList}}
+                        <li class="cards-list__item">
+                            <p class="cards-list__item__label">ФИО врача: {{this.firstName}} {{this.lastName}} {{this.surName}}</p>
+                            <p class="cards-list__item__label">Диагноз: {{this.diagnosis}}</p>
+                            <p class="cards-list__item__label cards-list__item__label--little">Дата приёма: {{this.date}}</p>
+                            <div class="cards-list__item__btn js-active-modal" data-modal="conclusion">Открыть заключение</div>
+                        </li>
+                    {{/each}}
+                </ul>
+            </div>
+        </main> 
+
+        <div class="modal-record">
+            <h3 class="modal-record__title"></h3>
+            <form action="">
+
+                <div class="modal-record__group">
+                    <label for="doctor">Врач: </label>
+                    <input id="doctor" class="modal-record__input" type="text" placeholder="Укажите ФИО врача">
+                </div>
+                <div class="modal-record__group">
+                    <label for="diagnosis">Диагноз: </label>
+                    <input id="diagnosis" class="modal-record__input" type="text" placeholder="Укажите диагноз">
+                </div>
+                <div class="modal-record__group">
+                    <label for="medicines">Выписанные лекарства: </label>
+                    <input id="medicines" class="modal-record__input" type="text" placeholder="Список лекарст">
+                </div>
+                <div class="modal-record__group">
+                    <label for="recommend">Рекомендации врача: </label>
+                    <input id="recommend" class="modal-record__input" type="text" placeholder="Добавите рекомендации">
+                </div>
+                <div class="modal-record__group">
+                    <input class="modal-record__input" type="data">
+                </div>
+{{!-- 
+    1. Доделать модальное окно
+    2. НАстроить вывод данных из бд
+    3. Настроить добавление новой записи
+    4. Настроить смену статуса
+    5. Настроить печать карты
+    6. Настроить сохранение карты как отдельного текстового документа
+ --}}
+                <hr class="modal-record__line">
+
+                <button class="modal-record__btn" type="submit">Создать заключение</button>
+
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/main.js"></script>
+    <script src="/js/cards.js"></script>
+</body>
+</html>

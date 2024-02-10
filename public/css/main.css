@@ -18,6 +18,25 @@
     z-index: 1;
 }
 
+.header-link{
+    padding: 10px 0;
+}
+
+.header-link-btn{
+    font-size: 32px;
+    text-decoration: underline;
+
+    color: #000;
+
+    transition: all .7s ease;
+}
+
+.header-link-btn:hover{
+    color: #4a4a4a;
+
+    transition: all .7s ease;
+}
+
 .main{
     flex: 1 1 auto;
 

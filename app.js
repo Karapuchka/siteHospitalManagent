@@ -276,6 +276,8 @@ app.get('/patients', (_, res)=>{
 
 app.post('/getCards/:id', urlcodedParsers, (req, res)=>{
     if(!req.body) return res.send(400);
+
+    res.render('cards.hbs')
 });
 
 app.listen(3000, ()=>{
