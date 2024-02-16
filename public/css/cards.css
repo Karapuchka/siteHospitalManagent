@@ -173,3 +173,156 @@
     background: #7985ec;
     transition: all .4s ease;
 }
+
+.modal-record{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+
+    width: 100%;
+    height: 100%;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+
+    background-color: rgba(0, 0, 0, .6);
+}
+
+.modal-record__container{
+    width: 780px;
+    height: 600px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+
+    padding: 20px 30px;
+
+    background-color: #fff;
+
+    border-radius: 20px;
+
+    position: relative;
+}
+
+.modal-record__btn-exit{
+    width: 35px;
+    height: 35px;
+
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    cursor: pointer;
+}
+
+.modal-record__btn-exit__line{
+    display: block;
+
+    width: .5px;
+    height: 100%;
+
+    background-color: #000;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    transition: all .7s ease;
+}
+
+.modal-record__btn-exit__line--left{
+    transform: rotate(-45deg);
+}
+
+.modal-record__btn-exit__line--right{
+    transform: rotate(45deg);
+}
+
+.modal-record__btn-exit:hover > .modal-record__btn-exit__line{
+    background-color: #404040;
+
+    transition: all .7s ease;
+}
+
+.modal-record__btn-exit:hover > .modal-record__btn-exit__line--left{
+   transform: rotate(45deg);
+}
+
+.modal-record__btn-exit:hover > .modal-record__btn-exit__line--right{
+    transform: rotate(-45deg);
+}
+ 
+.modal-record__title{
+    font-size: 32px;
+}
+
+.modal-record__form{
+    flex-grow: 1;
+
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.modal-record__group{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.modal-record__input{
+    width: 100%;
+}
+
+.modal-record__input--big{
+    height: 250px;
+}
+
+.modal-record__input--data{
+    width: 12%;
+}
+
+.modal-record__group--btns{
+    border-top: 1px solid gray;
+
+    height: 80px;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 100px;
+}
+
+.modal-record__btn{
+    width: 240px;
+    height: 30px;
+
+    font-size: 14px;
+
+    transition: all .7s ease;
+    
+    background-color: #D9D9D9;
+}
+
+.modal-record__btn:hover{
+    transition: all .7s ease;
+
+    background-color: #f1f1f1;
+}
+
+.modal-record__btn:active{
+    transition: all .7s ease;
+
+    background-color: #8e8e8e;
+}
