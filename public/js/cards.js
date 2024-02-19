@@ -3,27 +3,13 @@ const btnModalActive = document.getElementById('js-active-modal');
 const modalRecord = document.querySelector('.modal-record');
 
 btnModalExit.onclick = ()=>{
-    modalRecord.style.opasity = '0';
+    modalRecord.style.opacity = '0';
     setTimeout(()=>{
         modalRecord.style.display = 'none';
     }, 100);
 };
 
-/* modalRecord.onclick = (e)=>{
-    if(e.target.className == 'modalRecord'){
-        modalRecord.style.opasity = '0';
-        setTimeout(()=>{
-            modalRecord.style.display = 'none';
-        }, 100);
-    }
-}; */
-
-console.log(btnModalActive);
-
 btnModalActive.addEventListener('click', ()=>{
-    modalRecord.style.opasity = 1;
-    modalRecord.style.display = 'flex';
+        modalRecord.style.opacity = 1;
+        modalRecord.style.display = 'flex';
 });
-
-/* 
-Доделать кнопку для открытия окна */

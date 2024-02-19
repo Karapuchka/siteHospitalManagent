@@ -69,9 +69,9 @@
                     <li class="cards-info__list__item">ID пациента: {{id}}</li>
                 </ul>
                 <ul class="cards-info__list">
-                    <li class="cards-info__list__item" id="js-active-modal"><div class="cards-btns-label cards-btns-label--green">Добавить запись</div></li>
+                    <li class="cards-info__list__item" id="js-active-modal"><button class="cards-btns-label cards-btns-label--green">Добавить запись</button></li>
                     <li class="cards-info__list__item"><form class="cards-btns" action="/printCards"><button class="cards-btns-label cards-btns-label--gray" type="submit">Распечатать карточку</button></form></li>
-                    <li class="cards-info__list__item"><form class="cards-btns" action="/showCards"><button class="cards-btns-label cards-btns-label--red" type="submit">Перевести в статус {{#if status}}«Закрыт»{{else}}«Активный»{{/if}}</button></form></li>
+                    <li class="cards-info__list__item"><form class="cards-btns" action="/showCards"><button class="cards-btns-label cards-btns-label--red" type="submit">Перевести в статус {{#if statusCards}}«Закрыт»{{else}}«Активный»{{/if}}</button></form></li>
                 </ul>
             </div>
         </header>
@@ -80,29 +80,9 @@
             <div class="container">
                 <h3 class="cards-title">История лечения:</h3>
                 <ul class="cards-list">
-                    <li class="cards-list__item">
-                            <p class="cards-list__item__label">ФИО врача: {{this.firstName}} {{this.lastName}} {{this.surName}}</p>
-                            <p class="cards-list__item__label">Диагноз: {{this.diagnosis}}</p>
-                            <p class="cards-list__item__label cards-list__item__label--little">Дата приёма: {{this.date}}</p>
-                            <div class="cards-list__item__btn js-active-modal" data-modal="conclusion">Открыть заключение</div>
-                        </li>
-                        <li class="cards-list__item">
-                            <p class="cards-list__item__label">ФИО врача: {{this.firstName}} {{this.lastName}} {{this.surName}}</p>
-                            <p class="cards-list__item__label">Диагноз: {{this.diagnosis}}</p>
-                            <p class="cards-list__item__label cards-list__item__label--little">Дата приёма: {{this.date}}</p>
-                            <div class="cards-list__item__btn js-active-modal" data-modal="conclusion">Открыть заключение</div>
-                        </li>
-                        <li class="cards-list__item">
-                            <p class="cards-list__item__label">ФИО врача: {{this.firstName}} {{this.lastName}} {{this.surName}}</p>
-                            <p class="cards-list__item__label">Диагноз: {{this.diagnosis}}</p>
-                            <p class="cards-list__item__label cards-list__item__label--little">Дата приёма: {{this.date}}</p>
-                            <div class="cards-list__item__btn js-active-modal" data-modal="conclusion">Открыть заключение</div>
-                        </li>
                     {{#each cardsList}}
                         <li class="cards-list__item">
-                            <p class="cards-list__item__label">ФИО врача: {{this.firstName}} {{this.lastName}} {{this.surName}}</p>
                             <p class="cards-list__item__label">Диагноз: {{this.diagnosis}}</p>
-                            <p class="cards-list__item__label cards-list__item__label--little">Дата приёма: {{this.date}}</p>
                             <div class="cards-list__item__btn js-active-modal" data-modal="conclusion">Открыть заключение</div>
                         </li>
                     {{/each}}
@@ -150,7 +130,6 @@
         </div>
 
         {{!-- 
-    1. Доделать модальное окно
     2. НАстроить вывод данных из бд
     3. Настроить добавление новой записи
     4. Настроить смену статуса

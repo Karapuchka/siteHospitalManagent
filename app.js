@@ -277,7 +277,57 @@ app.get('/patients', (_, res)=>{
 app.post('/getCards/:id', urlcodedParsers, (req, res)=>{
     if(!req.body) return res.send(400);
 
-    res.render('cards.hbs')
+    let card = {};
+
+    pool.query('SELECT * FROM patientcard', (err, data)=>{
+        if(err) return console.log(err);
+
+        for (let i = 0; i < data.length; i++) {
+            if(data[i].id == +req.params.id){
+                let status = (data[i].status) ? 'Активен' : 'Не активен' ;
+      
+                pool.query('SELECT * FROM patient', (err, dataPatient)=>{
+                    if(err) return console.log(err);
+             
+                    for (let j = 0; j < dataPatient.length; j++) {
+                        if(dataPatient[j].id == data[i].idPatient){
+
+                            pool.query('SELECT * FROM conclusion', (err, dataConcsludion)=>{
+                                if(err) return console.log(err);
+
+                                let cardsList = [];
+
+                                for (let x = 0; x < dataConcsludion.length; x++) {
+
+                                    if(dataConcsludion[x].idPatient == dataPatient[j].id){
+                                        cardsList.push({'diagnosis': dataConcsludion[x].diagnosis});
+
+                                    }
+                                }
+
+                                return res.render('cards.hbs', {
+                                    id: dataPatient[j].id,
+                                    firstName: dataPatient[j].firstName,
+                                    lastName: dataPatient[j].lastName,
+                                    surName: dataPatient[j].surName,
+                                    gender: dataPatient[j].gender,
+                                    snils: dataPatient[j].snils,
+                                    polis: dataPatient[j].polis,
+                                    phone: dataPatient[j].phone,
+                                    email: dataPatient[j].email,
+                                    statusCards: data[i].status,
+                                    status: status,
+                                    cardsList: cardsList,
+                                });
+                            });
+
+                        break;
+                        };                          
+                    };
+                }); 
+            };
+        }
+    });
 });
 
 app.listen(3000, ()=>{
