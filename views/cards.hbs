@@ -70,7 +70,6 @@
                 </ul>
                 <ul class="cards-info__list">
                     <li class="cards-info__list__item" id="js-active-modal"><button class="cards-btns-label cards-btns-label--green">Добавить запись</button></li>
-                    <li class="cards-info__list__item"><form class="cards-btns" action="/printCards"><button class="cards-btns-label cards-btns-label--gray" type="submit">Распечатать карточку</button></form></li>
                     <li class="cards-info__list__item"><form class="cards-btns" action="/showCards"><button class="cards-btns-label cards-btns-label--red" type="submit">Перевести в статус {{#if statusCards}}«Закрыт»{{else}}«Активный»{{/if}}</button></form></li>
                 </ul>
             </div>
@@ -79,11 +78,11 @@
         <main class="main">
             <div class="container">
                 <h3 class="cards-title">История лечения:</h3>
-                <ul class="cards-list">
+                <ul class="cards-list" id="js-cards-list">
                     {{#each cardsList}}
-                        <li class="cards-list__item">
+                        <li class="cards-list__item" id="{{this.id}}">
                             <p class="cards-list__item__label">Диагноз: {{this.diagnosis}}</p>
-                            <div class="cards-list__item__btn js-active-modal" data-modal="conclusion">Открыть заключение</div>
+                            <div class="cards-list__item__btn" id="{{this.id}}">Открыть заключение</div>
                         </li>
                     {{/each}}
                 </ul>
@@ -129,12 +128,74 @@
             </div>
         </div>
 
+        <div class="modal-record" id="js-moda-adding">
+            <div class="modal-record__container">
+                <div id="js-modal-adding-btn-exit" class="modal-record__btn-exit">
+                    <span class="modal-record__btn-exit__line modal-record__btn-exit__line--left"></span>
+                    <span class="modal-record__btn-exit__line modal-record__btn-exit__line--right"></span>
+                </div>
+                <h3 class="modal-record__title">Заключение врача</h3>
+                <form action="/addingRecord" method="post" class="modal-record__form" name="addingRecord">
+    
+                    <div class="modal-record__group">
+                        <label for="doctor">Врач: </label>
+                        <input id="doctor" class="modal-record__input" type="text" name="addingRecordDoctor" placeholder="Укажите ФИО врача">
+                    </div>
+                    <div class="modal-record__group">
+                        <label for="diagnosis">Диагноз: </label>
+                        <input id="diagnosis" class="modal-record__input" type="text" name="addingRecordDiagnosis" placeholder="Укажите диагноз">
+                    </div>
+                        <div class="modal-record__group">
+                        <label for="date">Дата: </label>
+                        <input class="modal-record__input modal-record__input--data" id="date" type="date" name="addingRecor">
+                    </div>
+                    <div class="modal-record__group">
+                        <label for="medicines">Выписанные лекарства: </label>
+                        <input id="medicines" class="modal-record__input" type="text" name="addingRecordMedicines" placeholder="Список лекарст">
+                    </div>
+                    <div class="modal-record__group">
+                        <label for="recommend">Рекомендации врача: </label>
+                        <input id="recommend" class="modal-record__input modal-record__input--big" type="text" name="addingRecordRecommend" placeholder="Добавите рекомендации">
+                    </div>
+        
+                    <div class="modal-record__group modal-record__group--btns">
+                        <button class="modal-record__btn" id="createRecord" name="createRecord" type="submit">Создать заключение</button>
+                    </div>
+    
+                </form>
+            </div>
+        </div>
+
+         <div class="modal-record" id="js-moda-open">
+            <div class="modal-record__container">
+                <div id="js-modal-open-btn-exit" class="modal-record__btn-exit">
+                    <span class="modal-record__btn-exit__line modal-record__btn-exit__line--left"></span>
+                    <span class="modal-record__btn-exit__line modal-record__btn-exit__line--right"></span>
+                </div>
+                <h3 class="modal-record__title">Заключение врача</h3>
+                <div class="modal-record__form">
+                    <div class="modal-record__group">
+                        <p>Врач: <span id="js-moda-open-doctor"></span></p>
+                    </div>
+                    <div class="modal-record__group">
+                        <p>Диагноз: <span id="js-moda-open-diagnonis"></span></p>
+                    </div>
+                    <div class="modal-record__group">
+                        <p>Дата: <span id="js-moda-open-date"></span></p>
+                    </div>
+                    <div class="modal-record__group">
+                        <p>Выписанные лекарства: <span id="js-moda-open-medicines"></span></p>
+                    </div>
+                    <div class="modal-record__group">
+                        <p>Рекомендации врача: <span id="js-moda-open-recommend"></span></p>
+                    </div>    
+                </div>
+            </div>
+        </div>
+
         {{!-- 
-    2. НАстроить вывод данных из бд
     3. Настроить добавление новой записи
     4. Настроить смену статуса
-    5. Настроить печать карты
-    6. Настроить сохранение карты как отдельного текстового документа
  --}}
     </div>
 

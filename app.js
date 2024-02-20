@@ -300,7 +300,7 @@ app.post('/getCards/:id', urlcodedParsers, (req, res)=>{
                                 for (let x = 0; x < dataConcsludion.length; x++) {
 
                                     if(dataConcsludion[x].idPatient == dataPatient[j].id){
-                                        cardsList.push({'diagnosis': dataConcsludion[x].diagnosis});
+                                        cardsList.push({'diagnosis': dataConcsludion[x].diagnosis, 'id': dataConcsludion[x].id});
 
                                     }
                                 }
@@ -327,6 +327,26 @@ app.post('/getCards/:id', urlcodedParsers, (req, res)=>{
                 }); 
             };
         }
+    });
+});
+
+app.post('/openConslusion', JSONParser, (req, res)=>{
+    if(!req.body) return res.sendStatus(400);
+
+    pool.query('SELECT * FROM conclusion', (err, data)=>{
+        if(err) return console.log(err);
+
+        let conslusion = data.find(item => item.id == req.body.idConclusion);
+
+        pool.query('SELECT * FROM users', (err, dataDoctor)=>{
+            if(err) return console.log(err);
+
+            let doctor = dataDoctor.find(item => item.id == conslusion.idDoctor);
+
+            conslusion.doctor = `${doctor.lastName} ${doctor.firstName} ${doctor.surName}`;
+
+            res.send(conslusion);
+        });
     });
 });
 
