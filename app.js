@@ -350,6 +350,56 @@ app.post('/openConslusion', JSONParser, (req, res)=>{
     });
 });
 
+app.post('/addingConslusion', JSONParser, (req, res)=>{
+    if(!req.body) return res.sendStatus(400);
+
+    pool.query('SELECT * FROM users', (err, data)=>{
+        if(err) return console.log(err);
+
+        let validDoctor = false;
+
+        for (let i = 0; i < data.length; i++) {
+            let firstName = RegExp(`${data[i].firstName}`, 'i');
+            let lastName = RegExp(`${data[i].lastName}`, 'i');
+            let surName = RegExp(`${data[i].surName}`, 'i');
+
+
+            if(req.body.doctor.search(firstName) != -1){
+
+                if(req.body.doctor.search(lastName) != -1){
+
+                    if(req.body.doctor.search(surName) != -1){
+                        validDoctor = true;
+
+                        if(req.body.diagnosis == ''){
+                            return res.send('Поле "Диагноз" не заполнено!');
+                        }
+
+
+                       /*  if(validInfo){
+
+                        } */
+
+                   /*      pool.query('INSERT INTO conclusion () WHERE ()', [], (err, data)=>{
+                            if(err) return console.log(err);
+
+
+                        }); */
+                    }
+                }
+            }
+        }
+
+        if(!validDoctor){ return res.send('Такого доктора нет в базе!') };
+    });
+
+    return res.send(req.body)
+
+ /*    pool.query('INSERT INTO conclusion () WHERE ()', [], (err, data)=>{
+        if(err) return console.log(err);
+    }); */
+});
+
 app.listen(3000, ()=>{
     console.log('Server ative. URL: http://localhost:3000/');
 });

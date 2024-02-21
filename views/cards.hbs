@@ -66,7 +66,7 @@
                     <li class="cards-info__list__item">Статус заявки: <span {{#if statusCards}}class="cards-info__list__item--green"{{else}}class="cards-info__list__item--red"{{/if}}>{{status}}</span></li>
                     <li class="cards-info__list__item">Номер телефона: <a href="tel:{{phone}}">{{phone}}</a></li>
                     <li class="cards-info__list__item">Email: {{email}}</li>
-                    <li class="cards-info__list__item">ID пациента: {{id}}</li>
+                    <li class="cards-info__list__item" id="patient-id" data-id="{{id}}">ID пациента: {{id}}</li>
                 </ul>
                 <ul class="cards-info__list">
                     <li class="cards-info__list__item" id="js-active-modal"><button class="cards-btns-label cards-btns-label--green">Добавить запись</button></li>
@@ -89,45 +89,6 @@
             </div>
         </main> 
 
-        <div class="modal-record">
-            <div class="modal-record__container">
-                <div id="js-modal-btn-exit" class="modal-record__btn-exit">
-                    <span class="modal-record__btn-exit__line modal-record__btn-exit__line--left"></span>
-                    <span class="modal-record__btn-exit__line modal-record__btn-exit__line--right"></span>
-                </div>
-                <h3 class="modal-record__title">Заключение врача</h3>
-                <form action="/addingRecord" method="post" class="modal-record__form" name="addingRecord">
-    
-                    <div class="modal-record__group">
-                        <label for="doctor">Врач: </label>
-                        <input id="doctor" class="modal-record__input" type="text" name="addingRecordDoctor" placeholder="Укажите ФИО врача">
-                    </div>
-                    <div class="modal-record__group">
-                        <label for="diagnosis">Диагноз: </label>
-                        <input id="diagnosis" class="modal-record__input" type="text" name="addingRecordDiagnosis" placeholder="Укажите диагноз">
-                    </div>
-                        <div class="modal-record__group">
-                        <label for="date">Дата: </label>
-                        <input class="modal-record__input modal-record__input--data" id="date" type="date" name="addingRecor">
-                    </div>
-                    <div class="modal-record__group">
-                        <label for="medicines">Выписанные лекарства: </label>
-                        <input id="medicines" class="modal-record__input" type="text" name="addingRecordMedicines" placeholder="Список лекарст">
-                    </div>
-                    <div class="modal-record__group">
-                        <label for="recommend">Рекомендации врача: </label>
-                        <input id="recommend" class="modal-record__input modal-record__input--big" type="text" name="addingRecordRecommend" placeholder="Добавите рекомендации">
-                    </div>
-        
-                    <div class="modal-record__group modal-record__group--btns">
-                        <button class="modal-record__btn" id="createRecord" name="createRecord" type="submit">Создать заключение</button>
-                        <button class="modal-record__btn" id="printRecord" name="printRecord" type="submit">Распечатать заключение</button>
-                    </div>
-    
-                </form>
-            </div>
-        </div>
-
         <div class="modal-record" id="js-moda-adding">
             <div class="modal-record__container">
                 <div id="js-modal-adding-btn-exit" class="modal-record__btn-exit">
@@ -135,31 +96,31 @@
                     <span class="modal-record__btn-exit__line modal-record__btn-exit__line--right"></span>
                 </div>
                 <h3 class="modal-record__title">Заключение врача</h3>
-                <form action="/addingRecord" method="post" class="modal-record__form" name="addingRecord">
+                <form class="modal-record__form" name="recordAdding">
     
                     <div class="modal-record__group">
                         <label for="doctor">Врач: </label>
-                        <input id="doctor" class="modal-record__input" type="text" name="addingRecordDoctor" placeholder="Укажите ФИО врача">
+                        <input id="doctor" class="modal-record__input" name="recordAddingDoctor" type="text" placeholder="Укажите ФИО врача">
                     </div>
                     <div class="modal-record__group">
                         <label for="diagnosis">Диагноз: </label>
-                        <input id="diagnosis" class="modal-record__input" type="text" name="addingRecordDiagnosis" placeholder="Укажите диагноз">
+                        <input id="diagnosis" class="modal-record__input" name="recordAddingDiagmosis" type="text" placeholder="Укажите диагноз">
                     </div>
                         <div class="modal-record__group">
                         <label for="date">Дата: </label>
-                        <input class="modal-record__input modal-record__input--data" id="date" type="date" name="addingRecor">
+                        <input class="modal-record__input modal-record__input--data" name="recordAddingDate" id="date" type="date" name="addingRecor">
                     </div>
                     <div class="modal-record__group">
                         <label for="medicines">Выписанные лекарства: </label>
-                        <input id="medicines" class="modal-record__input" type="text" name="addingRecordMedicines" placeholder="Список лекарст">
+                        <input id="medicines" class="modal-record__input" type="text" name="recordAddingMedicines" placeholder="Список лекарст">
                     </div>
                     <div class="modal-record__group">
                         <label for="recommend">Рекомендации врача: </label>
-                        <input id="recommend" class="modal-record__input modal-record__input--big" type="text" name="addingRecordRecommend" placeholder="Добавите рекомендации">
+                        <input id="recommend" class="modal-record__input modal-record__input--big" type="text" name="recordAddingRecommend" placeholder="Добавите рекомендации">
                     </div>
         
                     <div class="modal-record__group modal-record__group--btns">
-                        <button class="modal-record__btn" id="createRecord" name="createRecord" type="submit">Создать заключение</button>
+                        <button class="modal-record__btn" id="createRecord" type="button">Создать заключение</button>
                     </div>
     
                 </form>
