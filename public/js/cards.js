@@ -15,6 +15,8 @@ const btnModalActive = document.getElementById('js-active-modal');
 const btnAddingConclusion = document.getElementById('createRecord');
 const formAddimgRecord = document.forms.recordAdding;
 
+const templateRecord = document.getElementById('template-record');
+
 btnModalAddingExit.onclick = ()=>{
     modalAdding.style.opacity = '0';
     setTimeout(()=>{
@@ -26,9 +28,6 @@ btnModalActive.addEventListener('click', ()=>{
     modalAdding.style.opacity = 1;
     modalAdding.style.display = 'flex';
 });
-
-console.log(formAddimgRecord.elements);
-console.log(formAddimgRecord.elements.recordAddingDoctor);
 
 btnAddingConclusion.onclick = async ()=>{
     const res = await fetch('/addingConslusion', {
@@ -44,9 +43,31 @@ btnAddingConclusion.onclick = async ()=>{
         }),
     });
 
-    let result = await res.text();
+    let resText = await res.text();
 
-    alert(result);
+    let result = JSON.parse(resText);
+
+    alert(result.resultOperation);
+
+    for (let i = 0; i < result.cardsList.length; i++) {
+        
+        let item = templateRecord.content.firstElementChild.cloneNode(true);
+        let btn = item.querySelector('div');
+        let text = item.querySelector('span');
+
+        btn.setAttribute('id', result.cardsList.id);
+        item.setAttribute('id', result.cardsList.id);
+        text.innerText = result.cardsList.diagnosis;
+
+        console.log(item);
+
+        listCards.appendChild(item);
+    }
+
+    modalAdding.style.opacity = '0';
+    setTimeout(()=>{
+        modalAdding.style.display = 'none';
+    }, 100);
 };
 
 listCards.onclick = async (e)=>{

@@ -371,33 +371,52 @@ app.post('/addingConslusion', JSONParser, (req, res)=>{
                     if(req.body.doctor.search(surName) != -1){
                         validDoctor = true;
 
-                        if(req.body.diagnosis == ''){
-                            return res.send('Поле "Диагноз" не заполнено!');
+                        switch ('') {
+                            case req.body.diagnosis:
+                                return res.send('Поле «Диагноз» не заполнено!');
+
+                            case req.body.date:
+                                return res.send('Поле «Дата» не заполнено!');
+
+                            case req.body.medicines:
+                                return res.send('Поле «Лекарства» не заполнено!');
+
+                            case req.body.recommend:
+                                return res.send('Поле «Рекомеендации» не заполнено!');
                         }
 
-
-                       /*  if(validInfo){
-
-                        } */
-
-                   /*      pool.query('INSERT INTO conclusion () WHERE ()', [], (err, data)=>{
+                        pool.query('INSERT INTO conclusion (idPatient, idDoctor, diagnosis, date, doctorRecommends, listMedicine) VALUES (?,?,?,?,?,?)', 
+                        [+req.body.idPatient, data[i].id, req.body.diagnosis, req.body.date, req.body.recommend, req.body.medicines], (err, data)=>{
                             if(err) return console.log(err);
+                        });
 
-
-                        }); */
+                        break;
                     }
                 }
             }
         }
 
         if(!validDoctor){ return res.send('Такого доктора нет в базе!') };
+
+        
+        pool.query('SELECT * FROM conclusion', (err, dataConcsludion)=>{
+            if(err) return console.log(err);
+
+            let cardsList = [];
+
+            for (let i = 0; i < dataConcsludion.length; i++) {
+
+                if(dataConcsludion[i].idPatient == +req.body.idPatient){
+                    cardsList.push({'diagnosis': dataConcsludion[i].diagnosis, 'id': dataConcsludion[i].id});
+                }
+            }
+
+            return res.send({
+                resultOperation: "Запись добавлена!",
+                cardsList: cardsList,
+            });
+        });
     });
-
-    return res.send(req.body)
-
- /*    pool.query('INSERT INTO conclusion () WHERE ()', [], (err, data)=>{
-        if(err) return console.log(err);
-    }); */
 });
 
 app.listen(3000, ()=>{
