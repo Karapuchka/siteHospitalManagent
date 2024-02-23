@@ -17,6 +17,9 @@ const formAddimgRecord = document.forms.recordAdding;
 
 const templateRecord = document.getElementById('template-record');
 
+const btnSetStatus = document.getElementById('js-btn-set-status');
+const labelCardStatus = document.getElementById('js-card-status');
+
 btnModalAddingExit.onclick = ()=>{
     modalAdding.style.opacity = '0';
     setTimeout(()=>{
@@ -105,4 +108,40 @@ btnModalOpenExit.onclick = ()=>{
     setTimeout(()=>{
         modalOpen.style.display = 'none';
     }, 100);
+};
+
+btnSetStatus.onclick = async ()=>{
+
+    let choice = confirm('Подтвердите изменение статуса');
+
+    console.log(btnSetStatus.dataset.status);
+
+    if(choice){
+        const res = await fetch('/setStatusCard', {
+            headers: {"Content-Type": "application/json"},
+            method: 'POST',
+            body: JSON.stringify({'status': btnSetStatus.dataset.status, 'id': btnSetStatus.dataset.idcard}),
+        });
+    
+        let text = await res.text();
+        let valid = JSON.parse(text);
+    
+        if(valid){
+            btnSetStatus.innerText = 'Перевести в статус «Закрыт»';
+    
+            labelCardStatus.innerText = 'Статус заявки: Активный';
+            labelCardStatus.classList.remove('cards-info__list__item--red');
+            labelCardStatus.classList.add('cards-info__list__item--green');
+
+            btnSetStatus.setAttribute('data-status', '1');
+        } else {
+            btnSetStatus.innerText = 'Перевести в статус «Активный»';
+    
+            labelCardStatus.innerText = 'Статус заявки: «Закрыт»';
+            labelCardStatus.classList.remove('cards-info__list__item--green');
+            labelCardStatus.classList.add('cards-info__list__item--red');
+
+            btnSetStatus.setAttribute('data-status', '0');
+        }
+    }
 };

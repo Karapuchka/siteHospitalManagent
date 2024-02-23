@@ -318,6 +318,7 @@ app.post('/getCards/:id', urlcodedParsers, (req, res)=>{
                                     statusCards: data[i].status,
                                     status: status,
                                     cardsList: cardsList,
+                                    idCard: data[i].id,
                                 });
                             });
 
@@ -417,6 +418,16 @@ app.post('/addingConslusion', JSONParser, (req, res)=>{
             });
         });
     });
+});
+
+app.post('/setStatusCard', JSONParser, (req, res)=>{
+    if(!req.body) return res.sendStatus(400);
+    
+    let status = !(+req.body.status);
+
+    pool.query('UPDATE patientcard SET status=? WHERE id=?', [status, +req.body.id], (err) => {if(err) return console.log(err)});
+    
+    return res.send(status);
 });
 
 app.listen(3000, ()=>{

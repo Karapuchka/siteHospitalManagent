@@ -63,14 +63,14 @@
                     <li class="cards-info__list__item">СНИЛС: {{snils}}</li>
                 </ul>
                 <ul class="cards-info__list">
-                    <li class="cards-info__list__item">Статус заявки: <span {{#if statusCards}}class="cards-info__list__item--green"{{else}}class="cards-info__list__item--red"{{/if}}>{{status}}</span></li>
+                    <li class="cards-info__list__item" id="js-card-status">Статус заявки: <span {{#if statusCards}}class="cards-info__list__item--green"{{else}}class="cards-info__list__item--red"{{/if}}>{{status}}</span></li>
                     <li class="cards-info__list__item">Номер телефона: <a href="tel:{{phone}}">{{phone}}</a></li>
                     <li class="cards-info__list__item">Email: {{email}}</li>
                     <li class="cards-info__list__item" id="patient-id" data-id="{{id}}">ID пациента: {{id}}</li>
                 </ul>
                 <ul class="cards-info__list">
                     <li class="cards-info__list__item" id="js-active-modal"><button class="cards-btns-label cards-btns-label--green">Добавить запись</button></li>
-                    <li class="cards-info__list__item"><form class="cards-btns" action="/showCards"><button class="cards-btns-label cards-btns-label--red" type="submit">Перевести в статус {{#if statusCards}}«Закрыт»{{else}}«Активный»{{/if}}</button></form></li>
+                    <li class="cards-info__list__item"><div class="cards-btns"><button class="cards-btns-label cards-btns-label--red" id="js-btn-set-status" data-status="{{statusCards}}" data-idCard="{{idCard}}" type="button">Перевести в статус {{#if statusCards}}«Закрыт»{{else}}«Активный»{{/if}}</button></div></li>
                 </ul>
             </div>
         </header>
