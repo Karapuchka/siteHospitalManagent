@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/home.css">
+    <title>Главная</title>
+</head>
+<body>
+
+    <div class="wrapper">
+        
+        <aside class="burger" data-hidden="" id="burder">
+
+            <div class="burger__btn-exit" id="js-burger-btn-exit">
+                <span class="burger__btn-exit__line burger__btn-exit__line--left"></span>
+                <span class="burger__btn-exit__line burger__btn-exit__line--right"></span>
+            </div>
+
+            <div class="burger__logo">
+
+                <div class="burger__logo__images">
+                    <img src="/img/logo.png" alt="" class="burger__logo__images__icon">
+                </div>
+
+                <div class="burger__logo__text">
+                    <p class="burger__logo__text__label burger__logo__text__label--size-20">Hospital</p>
+                    <p class="burger__logo__text__label">Taking care of you</p>
+                </div>
+
+            </div>
+
+            <nav class="burger__menu">
+                <ul class="burger__menu__list">
+                    <li class="burger__menu__list__item"><a class="burger__menu__list__item__link" href="/home">Список врачей</a></li>
+                    <li class="burger__menu__list__item"><a class="burger__menu__list__item__link" href="/#">Отчеты</a></li>
+                    <li class="burger__menu__list__item"><a class="burger__menu__list__item__link" href="/patients">Пациенты</a></li>
+                    <li class="burger__menu__list__item"><a class="burger__menu__list__item__link" href="/reception">Записать на приём</a></li>
+                </ul>
+            </nav>
+
+            <div class="burger__btns">
+                <form action="/profile" class="burger__btns__form" method="post"><button class="burger__btns__form__btn" type="submit">Профиль</button></form>
+                <div class="burger__btns__btn"><a href="/" class="burger__btns__btn__link">Выход</a></div>
+            </div>
+
+        </aside>
+
+        <div class="burger-btn" id="jd-burger-btn">
+            <span class="burger-btn__line"></span>
+            <span class="burger-btn__line"></span>
+            <span class="burger-btn__line"></span>
+        </div>
+
+        <header class="header">
+            <div class="container">
+                <nav class="menu">
+                    <ul class="menu__list" id="js-menu-list">
+                        <li class="menu__list__item" data-show="0" id="js-menu-item-1">Терапевтический корпус</li>
+                        <li class="menu__list__item" data-show="1" id="js-menu-item-2">Педиатрическое отделение</li>
+                        <li class="menu__list__item" data-show="2" id="js-menu-item-3">Офтальмология</li>
+                        <li class="menu__list__item" data-show="3" id="js-menu-item-4">Отделение неврологии</li>
+                        <li class="menu__list__item" data-show="4" id="js-menu-item-5">Стоматологическое отделение</li>
+                        <li class="menu__list__item" data-show="5" id="js-menu-item-6">Травмпункт</li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <main class="main">
+            <div class="slider container" id="js-slider">
+            <form action="/create-reports" method="post"><button class="reporst-btns__btn reporst-btns__btn--green" type="submit" id="create-repost">Создать отчёт</button></form>
+                <ul class="slider__line" id="js-slider-line">
+                    <li class="slider__line__item" id="js-slider-line__item-1">
+                        <ul class="list-employee list-reports" id="list-repotrs">    
+                            {{#each emoloyeeTerapevt}}
+                                <li class="list-employee__item reporst-item">
+                                   <div class="reporst-label">
+                                        <p class="reporst-label__text">Отчёт: {{this.id}}</p>
+                                        <p class="reporst-label__text">Дата создания: {{this.date}}</p>
+                                   </div>
+                                    <div class="reporst-btns">
+                                        <form action="/open-report" method="post"><button class="reporst-btns__btn" data-id="{{this.id}}" type="submit">Открыть</button></form>
+                                        <button class="reporst-btns__btn reporst-btns__btn--red" data-id="{{this.id}}" type="button">Удалить</button>
+                                    </div>
+                                </li>
+                            {{/each}}
+                        </ul>
+                    </li>
+                    <li class="slider__line__item" id="js-slider-line__item-2">
+                        <ul class="list-employee">
+                             {{#each emoloyeePediatr}}
+                                  <li class="list-employee__item reporst-item">
+                                   <div class="reporst-label">
+                                        <p class="reporst-label__text">Отчёт: {{this.id}}</p>
+                                        <p class="reporst-label__text">Дата создания: {{this.date}}</p>
+                                   </div>
+                                    <div class="reporst-btns">
+                                        <form action="/open-report" method="post"><button class="reporst-btns__btn" data-id="{{this.id}}" type="submit">Открыть</button></form>
+                                        <button class="reporst-btns__btn reporst-btns__btn--red" data-id="{{this.id}}" type="button">Удалить</button>
+                                    </div>
+                                </li>
+                            {{/each}}
+                        </ul>
+                    </li>
+                    <li class="slider__line__item" id="js-slider-line__item-3">
+                        <ul class="list-employee">
+                            {{#each emoloyeeOftolmolog}}
+                                 <li class="list-employee__item reporst-item">
+                                   <div class="reporst-label">
+                                        <p class="reporst-label__text">Отчёт: {{this.id}}</p>
+                                        <p class="reporst-label__text">Дата создания: {{this.date}}</p>
+                                   </div>
+                                    <div class="reporst-btns">
+                                        <form action="/open-report" method="post"><button class="reporst-btns__btn" data-id="{{this.id}}" type="submit">Открыть</button></form>
+                                        <button class="reporst-btns__btn reporst-btns__btn--red" data-id="{{this.id}}" type="button">Удалить</button>
+                                    </div>
+                                </li>
+                            {{/each}}
+                        </ul>
+                    </li>
+                    <li class="slider__line__item" id="js-slider-line__item-4">
+                        <ul class="list-employee">
+                            {{#each emoloyeeNevrolog}}
+                                  <li class="list-employee__item reporst-item">
+                                   <div class="reporst-label">
+                                        <p class="reporst-label__text">Отчёт: {{this.id}}</p>
+                                        <p class="reporst-label__text">Дата создания: {{this.date}}</p>
+                                   </div>
+                                    <div class="reporst-btns">
+                                        <form action="/open-report" method="post"><button class="reporst-btns__btn" data-id="{{this.id}}" type="submit">Открыть</button></form>
+                                        <button class="reporst-btns__btn reporst-btns__btn--red" data-id="{{this.id}}" type="button">Удалить</button>
+                                    </div>
+                                </li>
+                            {{/each}}
+                        </ul>
+                    </li>
+                    <li class="slider__line__item" id="js-slider-line__item-5">
+                        <ul class="list-employee">
+                            {{#each emoloyeeStomotolog}}
+                                 <li class="list-employee__item reporst-item">
+                                   <div class="reporst-label">
+                                        <p class="reporst-label__text">Отчёт: {{this.id}}</p>
+                                        <p class="reporst-label__text">Дата создания: {{this.date}}</p>
+                                   </div>
+                                    <div class="reporst-btns">
+                                       <form action="/open-report" method="post"><button class="reporst-btns__btn" data-id="{{this.id}}" type="submit">Открыть</button></form>
+                                        <button class="reporst-btns__btn reporst-btns__btn--red" data-id="{{this.id}}" type="button">Удалить</button>
+                                    </div>
+                                </li>
+                            {{/each}}
+                        </ul>
+                    </li>
+                    <li class="slider__line__item" id="js-slider-line__item-6">
+                        <ul class="list-employee">
+                            {{#each emoloyeeTravma}}
+                                 <li class="list-employee__item reporst-item">
+                                   <div class="reporst-label">
+                                        <p class="reporst-label__text">Отчёт: {{this.id}}</p>
+                                        <p class="reporst-label__text">Дата создания: {{this.date}}</p>
+                                   </div>
+                                    <div class="reporst-btns">
+                                        <form action="/open-report" method="post"><button class="reporst-btns__btn" data-id="{{this.id}}" type="submit">Открыть</button></form>
+                                        <button class="reporst-btns__btn reporst-btns__btn--red" data-id="{{this.id}}" type="button">Удалить</button>
+                                    </div>
+                                </li>
+                            {{/each}}
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </main> 
+    </div>
+
+    <script src="/js/main.js"></script>
+    <script src="/js/slider.js"></script>
+    <script src="/js/report.js"></script>
+</body>
+</html>

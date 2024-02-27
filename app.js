@@ -430,6 +430,71 @@ app.post('/setStatusCard', JSONParser, (req, res)=>{
     return res.send(status);
 });
 
+app.get('/reports', (_, res)=>{
+    pool.query('SELECT * FROM reports', (err, data)=>{
+        if(err) return console.log(err);
+
+        let listTerapevt = [], 
+            listPediatr = [], 
+            listOftolmolog = [], 
+            listNevrolog = [], 
+            listStomotolog = [], 
+            listTravmpunkt = [];
+        
+        for (let i = 0; i < data.length; i++) {
+            data[i].date = validDate(data[i].date);
+
+            switch (data[i].department) {
+                case 'Терапевтический корпус':
+                    listTerapevt.push(data[i]);
+                    break;
+
+                case 'Педиатрическое отделение':
+                    listPediatr.push(data[i]);
+                    break;
+
+                case 'Офтальмология':
+                    listOftolmolog.push(data[i]);
+                    break;
+
+                case 'Отделение неврологии':
+                    listNevrolog.push(data[i]);
+                    break;
+
+                case 'Стоматологическое отделение':
+                    listStomotolog.push(data[i]);
+                    break;
+
+                case 'Травмпункт':
+                    listTravmpunkt.push(data[i]);
+                    break;
+            
+                default:
+                    console.log(`Указаное некорректное значение свойства deportamnet ${data[i].department}`);
+                    console.log(data[i]);
+                    break;
+            }           
+        }
+
+        return res.render('reports.hbs', {
+            emoloyeeTerapevt: listTerapevt,
+            emoloyeePediatr: listPediatr,
+            emoloyeeOftolmolog: listOftolmolog,
+            emoloyeeNevrolog: listNevrolog,
+            emoloyeeStomotolog: listStomotolog,
+            emoloyeeTravma: listTravmpunkt,
+        });
+    });
+});
+
+app.post('/del-report', JSONParser, (req, res)=>{
+    if(!req.body) return res.sendStatus(400);
+
+    pool.query('DELETE FROM reports WHERE id=?', [req.body.id], (err)=> {if(err) return console.log(err)});
+
+    return res.send('Отчет ' + req.body.id + ' удалён!');
+});
+
 app.listen(3000, ()=>{
     console.log('Server ative. URL: http://localhost:3000/');
 });
