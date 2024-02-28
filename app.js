@@ -305,6 +305,8 @@ app.post('/getCards/:id', urlcodedParsers, (req, res)=>{
                                     }
                                 }
 
+                                let receptionInfo = data[i].reception.split(',');
+
                                 return res.render('cards.hbs', {
                                     id: dataPatient[j].id,
                                     firstName: dataPatient[j].firstName,
@@ -319,6 +321,8 @@ app.post('/getCards/:id', urlcodedParsers, (req, res)=>{
                                     status: status,
                                     cardsList: cardsList,
                                     idCard: data[i].id,
+                                    doctor: receptionInfo[1],
+                                    reception: receptionInfo[0], 
                                 });
                             });
 
@@ -494,6 +498,10 @@ app.post('/del-report', JSONParser, (req, res)=>{
 
     return res.send('Отчет ' + req.body.id + ' удалён!');
 });
+
+/* 
+Доделать запись на приём
+*/
 
 app.listen(3000, ()=>{
     console.log('Server ative. URL: http://localhost:3000/');

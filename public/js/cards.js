@@ -20,6 +20,49 @@ const templateRecord = document.getElementById('template-record');
 const btnSetStatus = document.getElementById('js-btn-set-status');
 const labelCardStatus = document.getElementById('js-card-status');
 
+const btnReception = document.getElementById('btn-reception');
+const modalReception = document.getElementById('js-moda-reception');
+const btnOpenReception = document.getElementById('js-reception-modal');
+const btnExitReception = document.getElementById('btn-exit-reception');
+const receptionDoctor = document.getElementById('js-moda-reception-doctor');
+const receptionDate = document.getElementById('js-moda-reception-date');
+const receptionlabelDoctor = document.getElementById('patient-doctor');
+const receptionlabelDate = document.getElementById('patient-reception');
+
+/* btnExitReception.onclick = ()=>{
+    modalReception.style.opacity = '0';
+    setTimeout(()=>{
+        modalReception.style.display = 'none';
+    }, 100);
+}; */
+
+btnOpenReception.addEventListener('click', ()=>{
+    console.log(1);
+    console.log(modalReception.style.opacity);
+    modalReception.style.opacity = 1;
+    modalReception.style.display = 'flex';
+});
+
+btnReception.onclick = async (e)=>{
+    let res = await fetch('/adding-reception', {
+        headers: {'Content-Type': 'application/json'},
+        method: 'POST',
+        body: JSON.stringify({'idPatien': patietnId.dataset.id, 'receptionInfo': `${receptionDate.value}, ${receptionDoctor.value}`}),
+    });
+
+    let text = await res.text();
+
+    let result = JSON.parse(text);
+
+    receptionlabelDate.innerText = result[0];
+    receptionlabelDoctor.innerText = result[1];
+
+    modalReception.style.opacity = '0';
+    setTimeout(()=>{
+        modalReception.style.display = 'none';
+    }, 100);
+};  
+
 btnModalAddingExit.onclick = ()=>{
     modalAdding.style.opacity = '0';
     setTimeout(()=>{
