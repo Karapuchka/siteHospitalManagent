@@ -499,9 +499,14 @@ app.post('/del-report', JSONParser, (req, res)=>{
     return res.send('Отчет ' + req.body.id + ' удалён!');
 });
 
-/* 
-Доделать запись на приём
-*/
+app.post('/adding-reception', JSONParser, (req, res)=>{
+    if(!req.body) return res.sendStatus(400);
+
+    pool.query('UPDATE patientcard SET reception=? WHERE idPatient=?', [req.body.receptionInfo, req.body.idPatien], (err)=> {if(err) return console.log(err)});
+
+    let info = req.body.receptionInfo.split(',')
+    res.send(info);
+});
 
 app.listen(3000, ()=>{
     console.log('Server ative. URL: http://localhost:3000/');

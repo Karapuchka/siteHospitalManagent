@@ -29,16 +29,14 @@ const receptionDate = document.getElementById('js-moda-reception-date');
 const receptionlabelDoctor = document.getElementById('patient-doctor');
 const receptionlabelDate = document.getElementById('patient-reception');
 
-/* btnExitReception.onclick = ()=>{
+btnExitReception.onclick = ()=>{
     modalReception.style.opacity = '0';
     setTimeout(()=>{
         modalReception.style.display = 'none';
     }, 100);
-}; */
+}; 
 
 btnOpenReception.addEventListener('click', ()=>{
-    console.log(1);
-    console.log(modalReception.style.opacity);
     modalReception.style.opacity = 1;
     modalReception.style.display = 'flex';
 });
