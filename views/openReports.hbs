@@ -55,7 +55,29 @@
 
         <main class="main">
             <div class="container">
-               
+               <section class="open-reports__info">
+                    <ul class="open-reports__info__list">
+                        <li class="open-reports__info__list__item">Автор: <span class="open-reports__info__list__item__label">{{author}}</span></li>
+                        <li class="open-reports__info__list__item">Должность: <span class="open-reports__info__list__item__label">{{jobTitle}}</span></li>
+                    </ul>
+                    <ul class="open-reports__info__list">
+                        <li class="open-reports__info__list__item">Дата: <span class="open-reports__info__list__item__label">{{date}}</span></li>
+                        <li class="open-reports__info__list__item">Количество активных заявок: <span class="open-reports__info__list__item__label">{{countActiveReports}}</span></li>
+                    </ul>
+               </section>
+               <section class="open-reports__table">
+                    <h2 class="open-reports__table__title"></h2>
+                    <ul class="open-reports__table__list">
+                        {{#each listPatient}}
+                            <li class="open-reports__table__list__item">
+                                <div class="open-reports__table__list__item__number">{{this.number}}</div>
+                                <div class="open-reports__table__list__item__person">{{this.patient}}</div>
+                                <div class="open-reports__table__list__item__person">{{this.doctor}}</div>
+                                <div class="open-reports__table__list__item__person">{{this.diagnosis}}</div>
+                            </li>
+                        {{/each}}
+                    </ul>
+               </section>
             </div>
         </main> 
     </div>

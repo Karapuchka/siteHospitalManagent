@@ -1,0 +1,16 @@
+.open-reports__info{
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.open-reports__info__list{
+
+}
+
+.open-reports__info__list__item{
+
+}

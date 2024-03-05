@@ -504,8 +504,69 @@ app.post('/adding-reception', JSONParser, (req, res)=>{
 
     pool.query('UPDATE patientcard SET reception=? WHERE idPatient=?', [req.body.receptionInfo, req.body.idPatien], (err)=> {if(err) return console.log(err)});
 
-    let info = req.body.receptionInfo.split(',')
+    let info = req.body.receptionInfo.split(',');
     res.send(info);
+});
+
+app.post('/open-report/:id', urlcodedParsers, (req, res)=>{
+    if(!req.body) return res.sendStatus(400);
+
+    pool.query('SELECT * FROM reports', (err, dataReports)=>{
+        if(err) return console.log(err);
+
+        for (let i = 0; i < dataReports.length; i++) {
+            if(dataReports[i].id == req.params.id){
+                let author, jobTitle, date, countActiveReports, listPatient = [];
+
+                date = validDate(dataReports[i].date);
+                countActiveReports = dataReports[i].countActiveOrders;
+
+                pool.query('SELECT * FROM conclusion', (errConclusion, dataConclusion)=>{
+                    if(errConclusion) return console.log(errConclusion);
+
+                    let idConclusion = dataReports[i].listActiveOrders.split(',');
+                    let listConslusion = [];
+
+                    for (let j = 0; j < dataConclusion.length; j++) {
+                        for (let x = 0; x < idConclusion.length; x++) {
+                            if(+dataConclusion[j].id == +idConclusion[x]){
+                                listConslusion.push(dataConclusion[j]);
+
+                                break;
+                            };  
+                        };                      
+                    };
+
+                    let listDoctor = [];
+
+                    pool.query('SELECT * FROM users', (errDoctor, dataDoctor)=>{
+                        if(errDoctor) return console.log(errDoctor);
+    
+                        for (let c = 0; c < dataDoctor.length; c++) {
+                            if(dataReports[i].id == dataDoctor[c].id){
+                                listDoctor.push(dataDoctor[c]);
+                            };   
+                            
+                            if(dataReports[i].idAuthor == dataDoctor[c].id){
+                                author = `${dataDoctor[c].firstName} ${dataDoctor[c].surName} ${dataDoctor[c].lastName}`;
+                                jobTitle = dataDoctor[c].jobTitle;
+                            }; 
+                        };
+
+                        pool.query('SELECT * FROM patient', (errPatient, dataPatient)=>{
+                            if(errPatient) return console.log(errPatient);
+
+                            for (let v = 0; v < dataPatient.length; v++) {
+                                if (dataPatient[v].id == ) {
+                                    //Ты тут такую дичь замутил отец. Как будешь разбираться я хуй знает. Удачи!
+                                }                                
+                            }
+                        });
+                    });
+                });
+            };
+        };
+    });
 });
 
 app.listen(3000, ()=>{
