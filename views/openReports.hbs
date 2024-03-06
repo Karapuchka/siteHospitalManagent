@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/cards.css">
+    <link rel="stylesheet" href="/css/openRecords.css">
     <title>Главная</title>
 </head>
 <body>
@@ -54,7 +54,7 @@
         </div>
 
         <main class="main">
-            <div class="container">
+            <div class="container open-reports__container">
                <section class="open-reports__info">
                     <ul class="open-reports__info__list">
                         <li class="open-reports__info__list__item">Автор: <span class="open-reports__info__list__item__label">{{author}}</span></li>
@@ -66,14 +66,20 @@
                     </ul>
                </section>
                <section class="open-reports__table">
-                    <h2 class="open-reports__table__title"></h2>
+                    <h2 class="open-reports__table__title">Список активных заявок</h2>
                     <ul class="open-reports__table__list">
+                        <li class="open-reports__table__list__item">
+                                <div class="open-reports__table__list__item__number open-reports__table__list__item__title">№</div>
+                                <div class="open-reports__table__list__item__person open-reports__table__list__item__title">ФИО Пациента</div>
+                                <div class="open-reports__table__list__item__person open-reports__table__list__item__title">ФИО Врача</div>
+                                <div class="open-reports__table__list__item__diagnosis open-reports__table__list__item__title">Диагноз</div>
+                            </li>
                         {{#each listPatient}}
                             <li class="open-reports__table__list__item">
-                                <div class="open-reports__table__list__item__number">{{this.number}}</div>
-                                <div class="open-reports__table__list__item__person">{{this.patient}}</div>
-                                <div class="open-reports__table__list__item__person">{{this.doctor}}</div>
-                                <div class="open-reports__table__list__item__person">{{this.diagnosis}}</div>
+                                <div class="open-reports__table__list__item__text open-reports__table__list__item__number">{{this.number}}</div>
+                                <div class="open-reports__table__list__item__text open-reports__table__list__item__person">{{this.patient}}</div>
+                                <div class="open-reports__table__list__item__text open-reports__table__list__item__person">{{this.doctor}}</div>
+                                <div class="open-reports__table__list__item__text open-reports__table__list__item__diagnosis">{{this.diagnosis}}</div>
                             </li>
                         {{/each}}
                     </ul>

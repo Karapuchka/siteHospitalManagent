@@ -537,15 +537,20 @@ app.post('/open-report/:id', urlcodedParsers, (req, res)=>{
                         };                      
                     };
 
-                    let listDoctor = [];
-
                     pool.query('SELECT * FROM users', (errDoctor, dataDoctor)=>{
                         if(errDoctor) return console.log(errDoctor);
     
                         for (let c = 0; c < dataDoctor.length; c++) {
-                            if(dataReports[i].id == dataDoctor[c].id){
-                                listDoctor.push(dataDoctor[c]);
-                            };   
+
+                            for (let x = 0; x < dataConclusion.length; x++) {
+                                if (dataDoctor[c].id == dataConclusion[x].idDoctor) {
+                                    listPatient.push({
+                                        'doctor': `${dataDoctor[c].firstName} ${dataDoctor[c].surName} ${dataDoctor[c].firstName}`,
+                                        'idDoctor': dataDoctor[c].id,
+                                        'department': dataDoctor[c].department,
+                                    });
+                                };                        
+                            }
                             
                             if(dataReports[i].idAuthor == dataDoctor[c].id){
                                 author = `${dataDoctor[c].firstName} ${dataDoctor[c].surName} ${dataDoctor[c].lastName}`;
@@ -556,11 +561,47 @@ app.post('/open-report/:id', urlcodedParsers, (req, res)=>{
                         pool.query('SELECT * FROM patient', (errPatient, dataPatient)=>{
                             if(errPatient) return console.log(errPatient);
 
+                            let count = 1;
+
                             for (let v = 0; v < dataPatient.length; v++) {
-                                if (dataPatient[v].id == ) {
-                                    //Ты тут такую дичь замутил отец. Как будешь разбираться я хуй знает. Удачи!
-                                }                                
+                                for (let x = 0; x < dataConclusion.length; x++) {
+                                    if (+dataPatient[v].id == +dataConclusion[x].idPatient) {
+                                        for (let b = 0; b < listPatient.length; b++) {
+
+                                           if(+listPatient[b].idDoctor == +dataConclusion[x].idDoctor){
+                                                if(dataReports[i].department == listPatient[b].department){
+                                                    let oldDoctor = listPatient[b].doctor;
+                                                    listPatient[b] = {
+                                                        'number': count,
+                                                        'patient': `${dataPatient[v].firstName} ${dataPatient[v].surName} ${dataPatient[v].lastName}`,
+                                                        'doctor': oldDoctor,
+                                                        'diagnosis': dataConclusion[x].diagnosis,
+                                                    } 
+                                                    count++;
+                                                }else{
+                                                    listPatient[b] = false;
+                                                };  
+                                           }; 
+                                        };
+                                    };  
+                                };                              
+                            };
+
+                            let newArr = [];
+
+                            for (let v = 0; v < listPatient.length; v++) {
+                                if(listPatient[v]){
+                                    newArr.push(listPatient[v]);
+                                }                       
                             }
+
+                            res.render('openReports.hbs', {
+                                'author': author,
+                                'jobTitle': jobTitle,
+                                'date': date,
+                                'countActiveReports': countActiveReports,
+                                'listPatient': newArr,
+                            });
                         });
                     });
                 });
