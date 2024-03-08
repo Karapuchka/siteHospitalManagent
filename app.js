@@ -610,6 +610,24 @@ app.post('/open-report/:id', urlcodedParsers, (req, res)=>{
     });
 });
 
+app.get('/create-reports', (_, res)=>{
+    let date = new Date();
+
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+
+    if(day <= 9) day = `0${day}`;
+    if(month <= 9) month = `0${month}`;
+    if(month > 12) month = 12;
+
+    res.render('createReports.hbs', {
+        'author': `${user.firstName} ${user.surName} ${user.lastName}`,
+        'jobTitle': user.jobTitle,
+        'date': `${day}.${month}.${year}`,
+    });
+});
+
 app.listen(3000, ()=>{
     console.log('Server ative. URL: http://localhost:3000/');
 });

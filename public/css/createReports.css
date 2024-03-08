@@ -1,0 +1,82 @@
+.open-reports__btn{
+    width: 160px;
+    height: 40px;
+
+    transition: all .7s ease;
+
+    background-color: #BEFFAD;
+
+    font-size: 20px;
+}
+
+.open-reports__btn:hover{
+    transition: all .7s ease;
+
+    background-color: #daf6d3;
+}
+
+.open-reports__btn:active{
+    transition: all .7s ease;
+    
+    background-color: #7ef460;
+}
+
+.open-reports__table__form{
+    display: flex;
+
+}
+
+.open-reports__table__form{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 10px;
+
+    width: 100%;
+}
+
+.open-reports__table__form__group{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.open-reports__table__form__label{
+    user-select: none;
+
+    cursor: text;
+
+    font-size: 20px;
+}
+
+.reports__table__form__label--width-170{
+    width: 170px;
+}
+
+.reports__table__form__label--width-230{
+    width: 230px;
+}
+
+.open-reports__table__form__input{
+
+    padding: 5px;
+
+    font-size: 18px;
+
+    width: 100%;
+
+    border-bottom: 1px solid black;
+}
+
+.open-reports__table__form__btn{
+    background-color: #A1ABFF;
+}
+
+.open-reports__table__form__btn:hover{
+    background-color: #ced2fa;
+}
+
+.open-reports__table__form__btn:active{
+    background-color: #5e6df5;
+}

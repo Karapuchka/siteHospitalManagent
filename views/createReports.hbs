@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/openRecords.css">
+    <link rel="stylesheet" href="/css/createReports.css">
+    <title>Главная</title>
+</head>
+<body>
+
+    <div class="wrapper">
+        
+        <aside class="burger" data-hidden="" id="burder">
+
+            <div class="burger__btn-exit" id="js-burger-btn-exit">
+                <span class="burger__btn-exit__line burger__btn-exit__line--left"></span>
+                <span class="burger__btn-exit__line burger__btn-exit__line--right"></span>
+            </div>
+
+            <div class="burger__logo">
+
+                <div class="burger__logo__images">
+                    <img src="/img/logo.png" alt="" class="burger__logo__images__icon">
+                </div>
+
+                <div class="burger__logo__text">
+                    <p class="burger__logo__text__label burger__logo__text__label--size-20">Hospital</p>
+                    <p class="burger__logo__text__label">Taking care of you</p>
+                </div>
+
+            </div>
+
+            <nav class="burger__menu">
+                <ul class="burger__menu__list">
+                    <li class="burger__menu__list__item"><a class="burger__menu__list__item__link" href="/home">Список врачей</a></li>
+                    <li class="burger__menu__list__item"><a class="burger__menu__list__item__link" href="/reports">Отчеты</a></li>
+                    <li class="burger__menu__list__item"><a class="burger__menu__list__item__link" href="/patient">Пациенты</a></li>
+                </ul>
+            </nav>
+
+            <div class="burger__btns">
+                <form action="/profile" class="burger__btns__form" method="post"><button class="burger__btns__form__btn" type="submit">Профиль</button></form>
+                <div class="burger__btns__btn"><a href="/" class="burger__btns__btn__link">Выход</a></div>
+            </div>
+
+        </aside>
+
+        <div class="burger-btn" id="jd-burger-btn">
+            <span class="burger-btn__line"></span>
+            <span class="burger-btn__line"></span>
+            <span class="burger-btn__line"></span>
+        </div>
+
+        <main class="main">
+            <div class="container open-reports__container">
+               <section class="open-reports__info">
+                    <ul class="open-reports__info__list">
+                        <li class="open-reports__info__list__item">Автор: <span class="open-reports__info__list__item__label">{{author}}</span></li>
+                        <li class="open-reports__info__list__item">Должность: <span class="open-reports__info__list__item__label">{{jobTitle}}</span></li>
+                    </ul>
+                    <ul class="open-reports__info__list">
+                        <li class="open-reports__info__list__item">Дата: <span class="open-reports__info__list__item__label">{{date}}</span></li>
+                        <li class="open-reports__info__list__item">Количество активных заявок: <span class="open-reports__info__list__item__label" id="active-order"></span></li>
+                    </ul>
+                    <form action="/save-report" method="post"><button type="button" id="btn-save-reports" class="open-reports__btn">Сохранить</button></form>
+               </section>
+               <section class="open-reports__table">
+                    <h2 class="open-reports__table__title">Список активных заявок</h2>
+                    <div class="open-reports__table__form">
+                        <div class="open-reports__table__form__group">
+                            <label for="form-patient" class="open-reports__table__form__label reports__table__form__label--width-230">ФИО пациента:</label>
+                            <input id="form-patient" type="text" placeholder="Введите текст" class="open-reports__table__form__input">
+                        </div>
+                        <div class="open-reports__table__form__group">
+                            <label for="form-doctor" class="open-reports__table__form__label reports__table__form__label--width-170">ФИО врача:</label>
+                            <input id="form-doctor" type="text" placeholder="Введите текст" class="open-reports__table__form__input">
+                        </div>
+                        <div class="open-reports__table__form__group">
+                            <label for="form-diagnosis" class="open-reports__table__form__label">Диагноз:</label>
+                            <input id="form-diagnosis" type="text" placeholder="Введите текст" class="open-reports__table__form__input">
+                        </div>
+                        <button type="button" id="btn-adding-order" class="open-reports__btn open-reports__table__form__btn">Добавить</button>
+                    </div>
+                    <ul class="open-reports__table__list">
+                        <li class="open-reports__table__list__item" id="table-title">
+                            <div class="open-reports__table__list__item__number open-reports__table__list__item__title">№</div>
+                            <div class="open-reports__table__list__item__person open-reports__table__list__item__title">ФИО Пациента</div>
+                            <div class="open-reports__table__list__item__person open-reports__table__list__item__title">ФИО Врача</div>
+                            <div class="open-reports__table__list__item__diagnosis open-reports__table__list__item__title">Диагноз</div>
+                        </li>
+                    </ul>
+               </section>
+            </div>
+        </main> 
+    </div>
+
+    <template id="layout">
+         <li class="open-reports__table__list__item">
+            <div id="layout-number" class="open-reports__table__list__item__text open-reports__table__list__item__number"></div>
+            <div id="layout-patient" class="open-reports__table__list__item__text open-reports__table__list__item__person"></div>
+            <div id="layout-doctor" class="open-reports__table__list__item__text open-reports__table__list__item__person"></div>
+            <div id="layout-diagnosis" class="open-reports__table__list__item__text open-reports__table__list__item__diagnosis"></div>
+        </li>
+    </template>
+    <script src="/js/main.js"></script>
+</body>
+</html>
