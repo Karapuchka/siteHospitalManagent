@@ -621,11 +621,38 @@ app.get('/create-reports', (_, res)=>{
     if(month <= 9) month = `0${month}`;
     if(month > 12) month = 12;
 
-    res.render('createReports.hbs', {
-        'author': `${user.firstName} ${user.surName} ${user.lastName}`,
-        'jobTitle': user.jobTitle,
-        'date': `${day}.${month}.${year}`,
+    let doctor = [], patient = [], diagnosis = [];
+
+    pool.query('SELECT * FROM users', (errUser, dataUser)=>{
+        if(errUser) return console.log(errUser);
+
+        for (let i = 0; i < dataUser.length; i++) {
+            doctor.push({'id': dataUser[i].id, 'doctor': `${dataUser[i].firstName} ${dataUser[i].surName} ${dataUser[i].lastName}`});           
+        };
+
+        pool.query('SELECT * FROM patient', (errPatient, dataPatient)=>{
+            if(errPatient) return console.log(errPatient);
+
+            for (let i = 0; i < dataPatient.length; i++) {
+                patient.push({'id': dataPatient[i].id, 'patient': `${dataPatient[i].firstName} ${dataPatient[i].surName} ${dataPatient[i].lastName}`})
+            };
+
+            res.render('createReports.hbs', {
+                'author': `${user.firstName} ${user.surName} ${user.lastName}`,
+                'jobTitle': user.jobTitle,
+                'date': `${day}.${month}.${year}`,
+                'listPatient': patient,
+                'listDoctor': doctor,
+            });
+
+        });
     });
+});
+
+app.post('/save-report', JSONParser, (req, res)=>{
+    if(!req.body) return res.sendStatus(400);
+    /* Седалть добавление в бд и написать отчёт */
+    console.log(req.body);
 });
 
 app.listen(3000, ()=>{

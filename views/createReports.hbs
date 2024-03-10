@@ -58,11 +58,11 @@
             <div class="container open-reports__container">
                <section class="open-reports__info">
                     <ul class="open-reports__info__list">
-                        <li class="open-reports__info__list__item">Автор: <span class="open-reports__info__list__item__label">{{author}}</span></li>
-                        <li class="open-reports__info__list__item">Должность: <span class="open-reports__info__list__item__label">{{jobTitle}}</span></li>
+                        <li class="open-reports__info__list__item">Автор: <span class="open-reports__info__list__item__label" id="js-author">{{author}}</span></li>
+                        <li class="open-reports__info__list__item">Должность: <span class="open-reports__info__list__item__label" id="js-jobTitle">{{jobTitle}}</span></li>
                     </ul>
                     <ul class="open-reports__info__list">
-                        <li class="open-reports__info__list__item">Дата: <span class="open-reports__info__list__item__label">{{date}}</span></li>
+                        <li class="open-reports__info__list__item">Дата: <span class="open-reports__info__list__item__label" id="js-date">{{date}}</span></li>
                         <li class="open-reports__info__list__item">Количество активных заявок: <span class="open-reports__info__list__item__label" id="active-order"></span></li>
                     </ul>
                     <form action="/save-report" method="post"><button type="button" id="btn-save-reports" class="open-reports__btn">Сохранить</button></form>
@@ -71,20 +71,28 @@
                     <h2 class="open-reports__table__title">Список активных заявок</h2>
                     <div class="open-reports__table__form">
                         <div class="open-reports__table__form__group">
-                            <label for="form-patient" class="open-reports__table__form__label reports__table__form__label--width-230">ФИО пациента:</label>
-                            <input id="form-patient" type="text" placeholder="Введите текст" class="open-reports__table__form__input">
+                            <label for="form-patient" class="open-reports__table__form__label">ФИО пациента:</label>
+                             <select name="patient" id="form-patient" class="open-reports__table__form__input">
+                                {{#each listPatient}}
+                                    <option data-patient{{this.id}}="{{this.id}}">{{this.patient}}</option>
+                                {{/each}}
+                            </select>
                         </div>
                         <div class="open-reports__table__form__group">
-                            <label for="form-doctor" class="open-reports__table__form__label reports__table__form__label--width-170">ФИО врача:</label>
-                            <input id="form-doctor" type="text" placeholder="Введите текст" class="open-reports__table__form__input">
+                            <label for="form-doctor" class="open-reports__table__form__label">ФИО врача:</label>
+                            <select name="doctror" id="form-doctor" class="open-reports__table__form__input">
+                                {{#each listDoctor}}
+                                    <option data-doctor{{this.id}}="{{this.id}}">{{this.doctor}}</option>
+                                {{/each}}
+                            </select>
                         </div>
                         <div class="open-reports__table__form__group">
                             <label for="form-diagnosis" class="open-reports__table__form__label">Диагноз:</label>
-                            <input id="form-diagnosis" type="text" placeholder="Введите текст" class="open-reports__table__form__input">
+                            <input type="text" name="" id="form-diagnosis" class="open-reports__table__form__input" placeholder="Введите текст">
                         </div>
                         <button type="button" id="btn-adding-order" class="open-reports__btn open-reports__table__form__btn">Добавить</button>
                     </div>
-                    <ul class="open-reports__table__list">
+                    <ul class="open-reports__table__list" id="list-orders">
                         <li class="open-reports__table__list__item" id="table-title">
                             <div class="open-reports__table__list__item__number open-reports__table__list__item__title">№</div>
                             <div class="open-reports__table__list__item__person open-reports__table__list__item__title">ФИО Пациента</div>
@@ -106,5 +114,6 @@
         </li>
     </template>
     <script src="/js/main.js"></script>
+    <script src="/js/createReports.js"></script>
 </body>
 </html>
