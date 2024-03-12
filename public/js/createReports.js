@@ -91,8 +91,10 @@ btnSaveReport.onclick = async ()=>{
             'author': document.getElementById('js-author').value,
             'date': document.getElementById('js-date').value,
             'jobTitle': document.getElementById('js-jobTitle').value,
-        }),
+        })
     });
 
-    alert('Отчет создан!');
+    let text = await res.text();
+    let answer = JSON.parse(text);
+    alert(answer);
 };

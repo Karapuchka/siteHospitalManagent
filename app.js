@@ -651,8 +651,71 @@ app.get('/create-reports', (_, res)=>{
 
 app.post('/save-report', JSONParser, (req, res)=>{
     if(!req.body) return res.sendStatus(400);
-    /* Седалть добавление в бд и написать отчёт */
-    console.log(req.body);
+
+    pool.query('SELECT * FROM patient', (errPatient, dataPatient)=>{
+        if(errPatient) return console.log(errPatient);
+
+        let idPatient = [], idDoctoe = [];
+
+        for (let i = 0; i < req.body.orders.length; i++) {
+            for (let j = 0; j < dataPatient.length; j++) {
+                if(`${dataPatient[j].firstName} ${dataPatient[j].surName} ${dataPatient[j].lastName}` == req.body.orders[i].patient){
+                    idPatient.push(dataPatient[j].id);
+                    break;
+                }
+            }          
+        }
+
+        pool.query('SELECT * FROM users', (errUsers, dataUsers)=>{
+            if(errUsers) return console.log(errUsers);
+
+            for (let i = 0; i < req.body.orders.length; i++) {
+                for (let j = 0; j < dataUsers.length; j++) {
+                    if(`${dataUsers[j].firstName} ${dataUsers[j].surName} ${dataUsers[j].lastName}` == req.body.orders[i].doctor){
+                        idDoctoe.push(dataUsers[j].id);
+                        break
+                    }
+                }          
+            }
+
+            let idConslusion = [];
+
+            pool.query('SELECT * FROM conclusion', (errConclusion, dataConclusion)=>{
+                if(errConclusion) return console.log(errConclusion);
+
+                let valid = false;
+        
+                for (let i = 0; i < dataConclusion.length; i++) {
+                    for (let j = 0; j < idPatient.length; j++) {
+                        if(+dataConclusion[i].idPatient == +idPatient[j]){
+                            for (let x = 0; x < idDoctoe.length; x++) {
+                                if(+dataConclusion[i].idDoctor == +idDoctoe[x]){
+                                    idConslusion.push(dataConclusion[j].id)
+                                } else {
+                                    valid = true;
+                                }  
+                            }
+                        }            
+                    }
+                }
+
+
+                if(!valid) {
+                return res.send(['В базе нет указанных вами данным. Пожалуйста, проверьте введённые ФИО врача и пациента!']);
+                }
+
+                let date = new Date();
+                console.log(2);
+                pool.query('INSERT INTO reports (department, idAuthor, countActiveOrders, listActiveOrders, date) VALUES (?,?,?,?,?)', 
+                            [user.department, user.id, req.body.countActiveOrders, idConslusion.join(','), date], 
+                            (err)=>{
+                                if(err) return console.log(err);
+
+                                return res.send(['Отчёт добавлен!'])
+                            });
+            });
+        });
+    });
 });
 
 app.listen(3000, ()=>{
@@ -679,4 +742,16 @@ function validDate(date){
     }
 
     return `${arr[2]} ${listMonth[arr[1]]} ${arr[3]}`;
+}
+
+function searchDublicate(arr){
+    let newArr = [];
+
+    for (let i = 0; i < arr.length; i++) {
+        if(newArr.indexOf(arr[i]) == -1){
+            newArr.push(arr[i]);
+        }
+    }
+
+    return newArr;
 }
